@@ -32,4 +32,43 @@ public class Subject implements Serializable{
 	public void prePersist(){
 		createAt = new Date();
 	}
+
+	public Subject() {
+	}
+
+	public Subject(Long id, @NotEmpty String career, Date createAt) {
+		this.id = id;
+		this.career = career;
+		this.createAt = createAt;
+	}
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public String getCareer() {
+		return career;
+	}
+
+	public void setCareer(String career) {
+		this.career = career;
+	}
+
+	public Date getCreateAt() {
+		return createAt;
+	}
+
+	public void setCreateAt(Date createAt) {
+		this.createAt = createAt;
+	}
+	
+	
+	
+	
+	
+	
 }
