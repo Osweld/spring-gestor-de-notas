@@ -56,4 +56,87 @@ public class Person implements Serializable{
 	public void prePersist(){
 		createAt = new Date();
 	}
+
+	public Person() {
+	
+	}
+
+	public Person(Long id, @NotEmpty String name, @NotEmpty String lastname, Date birthdate,
+			@NotEmpty @Email String email, @NotEmpty String gender, Date createAt, Career career) {
+		this.id = id;
+		this.name = name;
+		this.lastname = lastname;
+		this.birthdate = birthdate;
+		this.email = email;
+		this.gender = gender;
+		this.createAt = createAt;
+		this.career = career;
+	}
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getLastname() {
+		return lastname;
+	}
+
+	public void setLastname(String lastname) {
+		this.lastname = lastname;
+	}
+
+	public Date getBirthdate() {
+		return birthdate;
+	}
+
+	public void setBirthdate(Date birthdate) {
+		this.birthdate = birthdate;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public String getGender() {
+		return gender;
+	}
+
+	public void setGender(String gender) {
+		this.gender = gender;
+	}
+
+	public Date getCreateAt() {
+		return createAt;
+	}
+
+	public void setCreateAt(Date createAt) {
+		this.createAt = createAt;
+	}
+
+	public Career getCareer() {
+		return career;
+	}
+
+	public void setCareer(Career career) {
+		this.career = career;
+	}
+	
+	
+	
 }

@@ -37,4 +37,59 @@ public class Token implements Serializable{
 	public void prePersist(){
 		createAt = new Date();
 	}
+
+	public Token() {
+	
+	}
+
+	public Token(Long id, String activeToken, String passwordToken, Date createAt, User user) {
+		this.id = id;
+		this.activeToken = activeToken;
+		this.passwordToken = passwordToken;
+		this.createAt = createAt;
+		this.user = user;
+	}
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public String getActiveToken() {
+		return activeToken;
+	}
+
+	public void setActiveToken(String activeToken) {
+		this.activeToken = activeToken;
+	}
+
+	public String getPasswordToken() {
+		return passwordToken;
+	}
+
+	public void setPasswordToken(String passwordToken) {
+		this.passwordToken = passwordToken;
+	}
+
+	public Date getCreateAt() {
+		return createAt;
+	}
+
+	public void setCreateAt(Date createAt) {
+		this.createAt = createAt;
+	}
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+	
+	
+	
 }

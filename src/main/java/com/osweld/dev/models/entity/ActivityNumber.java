@@ -32,4 +32,51 @@ public class ActivityNumber implements Serializable{
 	public void prePersist(){
 		createAt = new Date();
 	}
+
+
+	public ActivityNumber() {
+		
+	}
+
+
+	public ActivityNumber(Long id, @NotNull Short number, Date createAt) {
+		this.id = id;
+		this.number = number;
+		this.createAt = createAt;
+	}
+
+
+	public Long getId() {
+		return id;
+	}
+
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+
+	public Short getNumber() {
+		return number;
+	}
+
+
+	public void setNumber(Short number) {
+		this.number = number;
+	}
+
+
+	public Date getCreateAt() {
+		return createAt;
+	}
+
+
+	public void setCreateAt(Date createAt) {
+		this.createAt = createAt;
+	}
+	
+	
+	
+	
+	
 }

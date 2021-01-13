@@ -20,7 +20,7 @@ public class Activity implements Serializable{
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "id_activities")//Hay que cambiarlo por activity mas adelante
+	@Column(name = "id_activity")//Hay que cambiarlo por activity mas adelante
 	private Long id;
 	@NotEmpty
 	private String activity;
@@ -32,4 +32,53 @@ public class Activity implements Serializable{
 	public void prePersist(){
 		createAt = new Date();
 	}
+
+	
+
+	public Activity() {
+	
+	}
+	
+	
+
+
+
+	public Activity(Long id, @NotEmpty String activity, Date createAt) {
+		this.id = id;
+		this.activity = activity;
+		this.createAt = createAt;
+	}
+
+
+
+	public Long getId() {
+		return id;
+	}
+
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+
+	public String getActivity() {
+		return activity;
+	}
+
+
+	public void setActivity(String activity) {
+		this.activity = activity;
+	}
+
+
+	public Date getCreateAt() {
+		return createAt;
+	}
+
+
+	public void setCreateAt(Date createAt) {
+		this.createAt = createAt;
+	}
+	
+	
 }

@@ -1,6 +1,7 @@
 package com.osweld.dev.models.entity;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -47,4 +48,79 @@ public class User implements Serializable{
 	public void prePersist(){
 		createAt = new Date();
 	}
+
+	public User() {
+	rol = new ArrayList<Rol>();
+	}
+
+	public User(Long id, @NotEmpty String username, @NotEmpty String password, @NotNull Boolean active, Date createAt,
+			Person person, List<Rol> rol) {
+		this.id = id;
+		this.username = username;
+		this.password = password;
+		this.active = active;
+		this.createAt = createAt;
+		this.person = person;
+		this.rol = rol;
+	}
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	public Boolean getActive() {
+		return active;
+	}
+
+	public void setActive(Boolean active) {
+		this.active = active;
+	}
+
+	public Date getCreateAt() {
+		return createAt;
+	}
+
+	public void setCreateAt(Date createAt) {
+		this.createAt = createAt;
+	}
+
+	public Person getPerson() {
+		return person;
+	}
+
+	public void setPerson(Person person) {
+		this.person = person;
+	}
+
+	public List<Rol> getRol() {
+		return rol;
+	}
+
+	public void setRol(List<Rol> rol) {
+		this.rol = rol;
+	}
+	
+	
+	
+	
 }

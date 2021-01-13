@@ -40,7 +40,7 @@ public class Assignment implements Serializable{
 	@JoinColumn(name = "id_subjects_per_semester")
 	private SubjectsPerSemester subjectsPerSemester;
 	@ManyToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "id_activities")
+	@JoinColumn(name = "id_activity")
 	private Activity activity;
 	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "id_activity_number")
@@ -50,5 +50,80 @@ public class Assignment implements Serializable{
 	public void prePersist(){
 		createAt = new Date();
 	}
+
+	public Assignment() {
+	
+	}
+
+	public Assignment(Long id, @NotNull Short percent, @DecimalMax("10") @DecimalMin("0") Double score, Date createAt,
+			SubjectsPerSemester subjectsPerSemester, Activity activity, ActivityNumber activityNumber) {
+		this.id = id;
+		this.percent = percent;
+		this.score = score;
+		this.createAt = createAt;
+		this.subjectsPerSemester = subjectsPerSemester;
+		this.activity = activity;
+		this.activityNumber = activityNumber;
+	}
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public Short getPercent() {
+		return percent;
+	}
+
+	public void setPercent(Short percent) {
+		this.percent = percent;
+	}
+
+	public Double getScore() {
+		return score;
+	}
+
+	public void setScore(Double score) {
+		this.score = score;
+	}
+
+	public Date getCreateAt() {
+		return createAt;
+	}
+
+	public void setCreateAt(Date createAt) {
+		this.createAt = createAt;
+	}
+
+	public SubjectsPerSemester getSubjectsPerSemester() {
+		return subjectsPerSemester;
+	}
+
+	public void setSubjectsPerSemester(SubjectsPerSemester subjectsPerSemester) {
+		this.subjectsPerSemester = subjectsPerSemester;
+	}
+
+	public Activity getActivity() {
+		return activity;
+	}
+
+	public void setActivity(Activity activity) {
+		this.activity = activity;
+	}
+
+	public ActivityNumber getActivityNumber() {
+		return activityNumber;
+	}
+
+	public void setActivityNumber(ActivityNumber activityNumber) {
+		this.activityNumber = activityNumber;
+	}
+	
+	
+	
+	
 
 }

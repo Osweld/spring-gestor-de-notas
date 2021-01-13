@@ -11,8 +11,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.PrePersist;
 import javax.persistence.Table;
 
@@ -43,4 +41,59 @@ public class Semester implements Serializable{
 	public void prePersist(){
 		createAt = new Date();
 	}
+
+	public Semester() {
+	}
+
+	public Semester(Long id, Date createAt, User user, Year year, Cycle cycle) {
+		this.id = id;
+		this.createAt = createAt;
+		this.user = user;
+		this.year = year;
+		this.cycle = cycle;
+	}
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public Date getCreateAt() {
+		return createAt;
+	}
+
+	public void setCreateAt(Date createAt) {
+		this.createAt = createAt;
+	}
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
+	public Year getYear() {
+		return year;
+	}
+
+	public void setYear(Year year) {
+		this.year = year;
+	}
+
+	public Cycle getCycle() {
+		return cycle;
+	}
+
+	public void setCycle(Cycle cycle) {
+		this.cycle = cycle;
+	}
+	
+	
+	
+	
 }

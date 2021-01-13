@@ -31,4 +31,41 @@ public class Year implements Serializable{
 	public void prePersist(){
 		createAt = new Date();
 	}
+
+	public Year() {
+	}
+
+	public Year(Long id, Integer year, Date createAt) {
+		this.id = id;
+		this.year = year;
+		this.createAt = createAt;
+	}
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public Integer getYear() {
+		return year;
+	}
+
+	public void setYear(Integer year) {
+		this.year = year;
+	}
+
+	public Date getCreateAt() {
+		return createAt;
+	}
+
+	public void setCreateAt(Date createAt) {
+		this.createAt = createAt;
+	}
+	
+	
+	
+	
 }

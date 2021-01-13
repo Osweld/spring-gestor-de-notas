@@ -42,4 +42,72 @@ public class SubjectsPerCareer implements Serializable{
 		createAt = new Date();
 	}
 
+
+	public SubjectsPerCareer() {
+	
+	}
+
+
+	public SubjectsPerCareer(Long id, Date createAt, Career career, Cycle cycle, Subject subject) {
+		this.id = id;
+		this.createAt = createAt;
+		this.career = career;
+		this.cycle = cycle;
+		this.subject = subject;
+	}
+
+
+	public Long getId() {
+		return id;
+	}
+
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+
+	public Date getCreateAt() {
+		return createAt;
+	}
+
+
+	public void setCreateAt(Date createAt) {
+		this.createAt = createAt;
+	}
+
+
+	public Career getCareer() {
+		return career;
+	}
+
+
+	public void setCareer(Career career) {
+		this.career = career;
+	}
+
+
+	public Cycle getCycle() {
+		return cycle;
+	}
+
+
+	public void setCycle(Cycle cycle) {
+		this.cycle = cycle;
+	}
+
+
+	public Subject getSubject() {
+		return subject;
+	}
+
+
+	public void setSubject(Subject subject) {
+		this.subject = subject;
+	}
+	
+	
+	
+	
+
 }

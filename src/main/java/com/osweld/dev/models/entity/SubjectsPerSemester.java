@@ -39,4 +39,61 @@ public class SubjectsPerSemester implements Serializable{
 		createAt = new Date();
 	}
 
+
+	public SubjectsPerSemester() {
+		
+	}
+
+
+	public SubjectsPerSemester(Long id, Date createAt, Semester semester, SubjectsPerCareer subjectsPerCareer) {
+		this.id = id;
+		this.createAt = createAt;
+		this.semester = semester;
+		this.subjectsPerCareer = subjectsPerCareer;
+	}
+
+
+	public Long getId() {
+		return id;
+	}
+
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+
+	public Date getCreateAt() {
+		return createAt;
+	}
+
+
+	public void setCreateAt(Date createAt) {
+		this.createAt = createAt;
+	}
+
+
+	public Semester getSemester() {
+		return semester;
+	}
+
+
+	public void setSemester(Semester semester) {
+		this.semester = semester;
+	}
+
+
+	public SubjectsPerCareer getSubjectsPerCareer() {
+		return subjectsPerCareer;
+	}
+
+
+	public void setSubjectsPerCareer(SubjectsPerCareer subjectsPerCareer) {
+		this.subjectsPerCareer = subjectsPerCareer;
+	}
+	
+	
+	
+	
+
 }
