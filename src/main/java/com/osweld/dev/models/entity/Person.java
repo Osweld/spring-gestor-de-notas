@@ -60,6 +60,12 @@ public class Person implements Serializable{
 	public Person() {
 	
 	}
+	
+	
+
+	public Person(Long id) {
+		this.id = id;
+	}
 
 	public Person(Long id, @NotEmpty String name, @NotEmpty String lastname, Date birthdate,
 			@NotEmpty @Email String email, @NotEmpty String gender, Date createAt, Career career) {

@@ -45,6 +45,11 @@ public class Semester implements Serializable{
 	public Semester() {
 	}
 
+	
+	public Semester(Long id) {
+		this.id = id;
+	}
+
 	public Semester(Long id, Date createAt, User user, Year year, Cycle cycle) {
 		this.id = id;
 		this.createAt = createAt;

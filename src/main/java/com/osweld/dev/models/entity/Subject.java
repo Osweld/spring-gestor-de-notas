@@ -35,6 +35,12 @@ public class Subject implements Serializable{
 
 	public Subject() {
 	}
+	
+	
+
+	public Subject(Long id) {
+		this.id = id;
+	}
 
 	public Subject(Long id, @NotEmpty String career, Date createAt) {
 		this.id = id;

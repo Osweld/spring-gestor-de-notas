@@ -44,6 +44,12 @@ public class SubjectsPerSemester implements Serializable{
 		
 	}
 
+	
+
+	public SubjectsPerSemester(Long id) {
+		this.id = id;
+	}
+
 
 	public SubjectsPerSemester(Long id, Date createAt, Semester semester, SubjectsPerCareer subjectsPerCareer) {
 		this.id = id;

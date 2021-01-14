@@ -36,6 +36,12 @@ public class Cycle implements Serializable{
 	public Cycle() {
 	
 	}
+	
+	
+
+	public Cycle(Long id) {
+		this.id = id;
+	}
 
 	public Cycle(Long id, String cycle, Date createAt) {
 		this.id = id;

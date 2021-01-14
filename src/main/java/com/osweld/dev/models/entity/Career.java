@@ -42,6 +42,12 @@ public class Career implements Serializable{
 	public Career() {
 	
 	}
+	
+	
+
+	public Career(Long id) {
+		this.id = id;
+	}
 
 	public Long getId() {
 		return id;

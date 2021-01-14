@@ -46,6 +46,13 @@ public class SubjectsPerCareer implements Serializable{
 	public SubjectsPerCareer() {
 	
 	}
+	
+	
+
+
+	public SubjectsPerCareer(Long id) {
+		this.id = id;
+	}
 
 
 	public SubjectsPerCareer(Long id, Date createAt, Career career, Cycle cycle, Subject subject) {

@@ -41,6 +41,12 @@ public class Rol implements Serializable{
 	public Rol() {
 	
 	}
+	
+	
+
+	public Rol(Long id) {
+		this.id = id;
+	}
 
 	public Rol(Long id, @NotEmpty String rol, Date createAt, User user) {
 		this.id = id;

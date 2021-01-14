@@ -41,6 +41,12 @@ public class Token implements Serializable{
 	public Token() {
 	
 	}
+	
+	
+
+	public Token(Long id) {
+		this.id = id;
+	}
 
 	public Token(Long id, String activeToken, String passwordToken, Date createAt, User user) {
 		this.id = id;

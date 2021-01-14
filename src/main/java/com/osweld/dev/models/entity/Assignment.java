@@ -54,6 +54,12 @@ public class Assignment implements Serializable{
 	public Assignment() {
 	
 	}
+	
+	
+
+	public Assignment(Long id) {
+		this.id = id;
+	}
 
 	public Assignment(Long id, @NotNull Short percent, @DecimalMax("10") @DecimalMin("0") Double score, Date createAt,
 			SubjectsPerSemester subjectsPerSemester, Activity activity, ActivityNumber activityNumber) {

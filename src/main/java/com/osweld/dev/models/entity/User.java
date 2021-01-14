@@ -52,6 +52,11 @@ public class User implements Serializable{
 	public User() {
 	rol = new ArrayList<Rol>();
 	}
+	
+
+	public User(Long id) {
+		this.id = id;
+	}
 
 	public User(Long id, @NotEmpty String username, @NotEmpty String password, @NotNull Boolean active, Date createAt,
 			Person person, List<Rol> rol) {

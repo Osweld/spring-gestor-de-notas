@@ -43,6 +43,12 @@ public class Activity implements Serializable{
 
 
 
+	public Activity(Long id) {
+		this.id = id;
+	}
+
+
+
 	public Activity(Long id, @NotEmpty String activity, Date createAt) {
 		this.id = id;
 		this.activity = activity;

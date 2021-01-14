@@ -37,6 +37,13 @@ public class ActivityNumber implements Serializable{
 	public ActivityNumber() {
 		
 	}
+	
+	
+
+
+	public ActivityNumber(Long id) {
+		this.id = id;
+	}
 
 
 	public ActivityNumber(Long id, @NotNull Short number, Date createAt) {

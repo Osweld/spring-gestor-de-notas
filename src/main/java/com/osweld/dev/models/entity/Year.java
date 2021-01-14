@@ -34,6 +34,12 @@ public class Year implements Serializable{
 
 	public Year() {
 	}
+	
+	
+
+	public Year(Long id) {
+		this.id = id;
+	}
 
 	public Year(Long id, Integer year, Date createAt) {
 		this.id = id;
