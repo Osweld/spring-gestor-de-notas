@@ -9,9 +9,9 @@ import com.osweld.dev.models.entity.SubjectsPerSemester;
 
 public interface SubjectsPerSemesterRepository extends JpaRepository<SubjectsPerSemester,Long>{
 	
-	@Query(value = "SELECT s FROM Semester s WHERE s.semester.id = ?1 AND s.semester.user.id = ?2")
+	@Query(value = "SELECT sps FROM SubjectsPerSemester sps WHERE sps.semester.id = ?1 AND sps.semester.user.id = ?2")
 	public List<SubjectsPerSemester> findBySemester(Long SemesterId,Long userId);
-	@Query(value = "SELECT s FROM Semester s WHERE s.id = ?1 AND s.semester.user.id = ?2")
+	@Query(value = "SELECT sps FROM SubjectsPerSemester sps WHERE sps.id = ?1 AND sps.semester.user.id = ?2")
 	public SubjectsPerSemester findById(Long subjectsPerSemesterId,Long userId);
 	
 

@@ -9,9 +9,9 @@ import com.osweld.dev.models.entity.Assignment;
 
 public interface AssignmentRepository extends JpaRepository<Assignment,Long>{
 	
-	@Query(value = "SELECT s FROM Semester s WHERE s.subjectsPerSemester.id = ?1 AND s.subjectsPerSemester.semester.user.id = ?2")
+	@Query(value = "SELECT a FROM Assignment a WHERE a.subjectsPerSemester.id = ?1 AND a.subjectsPerSemester.semester.user.id = ?2")
 	public List<Assignment> findBySubjectsPerSemester(Long subjectsPerSemesterId,Long userId);
-	@Query(value = "SELECT s FROM Semester s WHERE s.id = ?1 AND s.subjectsPerSemester.semester.user.id = ?2")
+	@Query(value = "SELECT a FROM Assignment a WHERE a.id = ?1 AND a.subjectsPerSemester.semester.user.id = ?2")
 	public Assignment findById(Long assignmentId,Long userId);
 
 }
