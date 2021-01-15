@@ -12,6 +12,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.PrePersist;
@@ -41,8 +42,9 @@ public class User implements Serializable{
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "id_person")
 	private Person person;
-	@OneToMany(mappedBy = "user")
-	private List<Rol> rol;
+	@ManyToOne()
+	@JoinColumn(name = "id_rol")
+	Rol rol;
 
 	@PrePersist
 	public void prePersist(){
@@ -50,7 +52,6 @@ public class User implements Serializable{
 	}
 
 	public User() {
-	rol = new ArrayList<Rol>();
 	}
 	
 
@@ -59,7 +60,7 @@ public class User implements Serializable{
 	}
 
 	public User(Long id, @NotEmpty String username, @NotEmpty String password, @NotNull Boolean active, Date createAt,
-			Person person, List<Rol> rol) {
+			Person person, Rol rol) {
 		this.id = id;
 		this.username = username;
 		this.password = password;
@@ -117,11 +118,11 @@ public class User implements Serializable{
 		this.person = person;
 	}
 
-	public List<Rol> getRol() {
+	public Rol getRol() {
 		return rol;
 	}
 
-	public void setRol(List<Rol> rol) {
+	public void setRol(Rol rol) {
 		this.rol = rol;
 	}
 	

@@ -29,9 +29,6 @@ public class Rol implements Serializable{
 	private String rol;
 	@Column(name = "create_at")
 	private Date createAt;
-	@ManyToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "id_user")
-	private User user;
 
 	@PrePersist
 	public void prePersist(){
@@ -48,11 +45,10 @@ public class Rol implements Serializable{
 		this.id = id;
 	}
 
-	public Rol(Long id, @NotEmpty String rol, Date createAt, User user) {
+	public Rol(Long id, @NotEmpty String rol, Date createAt) {
 		this.id = id;
 		this.rol = rol;
 		this.createAt = createAt;
-		this.user = user;
 	}
 
 	public Long getId() {
@@ -79,13 +75,7 @@ public class Rol implements Serializable{
 		this.createAt = createAt;
 	}
 
-	public User getUser() {
-		return user;
-	}
 
-	public void setUser(User user) {
-		this.user = user;
-	}
 	
 	
 	
