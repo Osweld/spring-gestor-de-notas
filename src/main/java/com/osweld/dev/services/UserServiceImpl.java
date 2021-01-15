@@ -6,13 +6,19 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.osweld.dev.models.entity.Person;
+import com.osweld.dev.models.entity.Rol;
 import com.osweld.dev.models.entity.User;
+import com.osweld.dev.models.repository.PersonRepository;
 import com.osweld.dev.models.repository.UserRepository;
 @Service
 public class UserServiceImpl implements UserService{
 	
 	@Autowired
 	private UserRepository userRepository;
+	
+	@Autowired
+	private PersonRepository personRepository;
 
 	@Override
 	@Transactional(readOnly = true)
@@ -28,6 +34,11 @@ public class UserServiceImpl implements UserService{
 
 	@Override
 	public User saveUser(User user) {
+		Person person = personRepository.save(user.getPerson());
+		if(person == null) return null;
+		user.setPerson(person);
+		user.setRol(new Rol(1L));
+		user.setActive(false);
 		return userRepository.save(user);
 	}
 
