@@ -28,4 +28,10 @@ public class SubjectsPerCareerServiceImpl implements SubjectsPerCareerService{
 		return subjectsPerCareerRepository.findAll();
 	}
 
+	@Override
+	public List<SubjectsPerCareer> getAllSubjectsPerCareerByCareerAndCycle(Long idCareer, Long idCycle) {
+		if(idCareer == null || idCycle == null) return null;
+		return subjectsPerCareerRepository.findByCareerAndCycle(idCareer,idCycle);
+	}
+
 }

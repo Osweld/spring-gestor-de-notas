@@ -3,6 +3,8 @@ package com.osweld.dev.services;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -19,6 +21,9 @@ public class UserServiceImpl implements UserService{
 	
 	@Autowired
 	private PersonRepository personRepository;
+	
+	@Autowired
+	private BCryptPasswordEncoder PasswordEncoder;
 
 	@Override
 	@Transactional(readOnly = true)
@@ -36,6 +41,7 @@ public class UserServiceImpl implements UserService{
 	public User saveUser(User user) {
 		Person person = personRepository.save(user.getPerson());
 		if(person == null) return null;
+		user.setPassword(PasswordEncoder.encode(user.getPassword()));
 		user.setPerson(person);
 		user.setRol(new Rol(1L));
 		user.setActive(false);

@@ -13,6 +13,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.PrePersist;
 import javax.persistence.Table;
+import javax.validation.constraints.NotEmpty;
 
 @Entity
 @Table(name = "tokens")
@@ -23,10 +24,10 @@ public class Token implements Serializable{
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id_token")
 	private Long id;
-	@Column(name = "active_token")
-	private String activeToken;
-	@Column(name = "password_token")
-	private String passwordToken;
+	@NotEmpty
+	private String token;
+	@Column(name = "expiration_date")
+	private Date expirationDate;
 	@Column(name = "create_at")
 	private Date createAt;
 	@OneToOne(cascade = CascadeType.ALL)
@@ -41,17 +42,11 @@ public class Token implements Serializable{
 	public Token() {
 	
 	}
-	
-	
 
-	public Token(Long id) {
+	public Token(Long id, @NotEmpty String token, Date expirationDate, Date createAt, User user) {
 		this.id = id;
-	}
-
-	public Token(Long id, String activeToken, String passwordToken, Date createAt, User user) {
-		this.id = id;
-		this.activeToken = activeToken;
-		this.passwordToken = passwordToken;
+		this.token = token;
+		this.expirationDate = expirationDate;
 		this.createAt = createAt;
 		this.user = user;
 	}
@@ -64,20 +59,20 @@ public class Token implements Serializable{
 		this.id = id;
 	}
 
-	public String getActiveToken() {
-		return activeToken;
+	public String getToken() {
+		return token;
 	}
 
-	public void setActiveToken(String activeToken) {
-		this.activeToken = activeToken;
+	public void setToken(String token) {
+		this.token = token;
 	}
 
-	public String getPasswordToken() {
-		return passwordToken;
+	public Date getExpirationDate() {
+		return expirationDate;
 	}
 
-	public void setPasswordToken(String passwordToken) {
-		this.passwordToken = passwordToken;
+	public void setExpirationDate(Date expirationDate) {
+		this.expirationDate = expirationDate;
 	}
 
 	public Date getCreateAt() {
@@ -97,5 +92,7 @@ public class Token implements Serializable{
 	}
 	
 	
-	
 }
+	
+	
+

@@ -8,5 +8,6 @@ public interface SubjectsPerCareerService {
 	
 	public SubjectsPerCareer getSubjectsPerCareer(Long subjectsPerCareerId);
 	public List<SubjectsPerCareer> getAllSubjectsPerCareer();
+	public List<SubjectsPerCareer> getAllSubjectsPerCareerByCareerAndCycle(Long idCareer,Long idCycle);
 
 }

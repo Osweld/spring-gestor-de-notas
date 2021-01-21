@@ -8,6 +8,7 @@ import java.util.Date;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.stereotype.Component;
 import org.springframework.util.Base64Utils;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -19,12 +20,13 @@ import io.jsonwebtoken.JwtException;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 
+@Component
 public class JWTServiceImpl implements JWTService{
 	
 	public static final String SECRET = Base64Utils.encodeToString("GestorNotas".getBytes());
 	public static final Long EXPIRATION_DATE = 1000*60*60*3L;
-	private static final String TOKEN_PREFIX = "Bearer ";
-	private static final String HEADER_STRING = "authorization";
+	public static final String TOKEN_PREFIX = "Bearer ";
+	public static final String HEADER_STRING = "authorization";
 
 	@Override
 	public String create(Authentication auth) throws IOException {
@@ -53,7 +55,7 @@ public class JWTServiceImpl implements JWTService{
 
 	@Override
 	public Claims getClaims(String token) {
-		Claims claims = Jwts.parser().setSigningKey(SECRET.getBytes()).parseClaimsJws(token).getBody();
+		Claims claims = Jwts.parser().setSigningKey(SECRET.getBytes()).parseClaimsJws(resolve(token)).getBody();
 		return claims;
 	}
 
