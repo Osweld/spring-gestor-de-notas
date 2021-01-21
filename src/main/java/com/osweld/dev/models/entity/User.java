@@ -17,6 +17,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.PrePersist;
 import javax.persistence.Table;
+import javax.validation.Valid;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
@@ -41,6 +42,7 @@ public class User implements Serializable{
 	private Date createAt;
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "id_person")
+	@Valid
 	private Person person;
 	@ManyToOne()
 	@JoinColumn(name = "id_rol")
