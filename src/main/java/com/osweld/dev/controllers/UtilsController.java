@@ -37,7 +37,6 @@ public class UtilsController {
     @Autowired
     private ActivityNumberService activityNumberService;
 
-    private ResponseEntity<Map<String,Object>> responseEntity;
 
     private Map<String,Object> body = new HashMap<>();
 
@@ -50,18 +49,17 @@ public class UtilsController {
             if(careerList != null){
                 body.put("message","Se obtuvieron las carreras");
                 body.put("career",careerList);
-                responseEntity = new ResponseEntity<>(body, HttpStatus.OK);
+                return new ResponseEntity<>(body, HttpStatus.OK);
             }else{
                 body.put("message","No se pudo obtener las carreras");
                 body.put("error","Hubo un error");
-                responseEntity = new ResponseEntity<>(body, HttpStatus.INTERNAL_SERVER_ERROR);
+                return new ResponseEntity<>(body, HttpStatus.INTERNAL_SERVER_ERROR);
             }
         }catch(DataAccessException e){
             body.put("message","No se pudo obtener las carreras");
             body.put("error","Hubo un error: "+e.getMostSpecificCause());
-            responseEntity = new ResponseEntity<>(body, HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity<>(body, HttpStatus.INTERNAL_SERVER_ERROR);
         }
-        return responseEntity;
     }
 
     @GetMapping("/cycle")
@@ -71,18 +69,17 @@ public class UtilsController {
             if(cycleList != null){
                 body.put("message","Se obtuvieron los ciclos");
                 body.put("cycle",cycleList);
-                responseEntity = new ResponseEntity<>(body, HttpStatus.OK);
+                return new ResponseEntity<>(body, HttpStatus.OK);
             }else{
                 body.put("message","No se pudo obtener los ciclos");
                 body.put("error","Hubo un error");
-                responseEntity = new ResponseEntity<>(body, HttpStatus.INTERNAL_SERVER_ERROR);
+                return new ResponseEntity<>(body, HttpStatus.INTERNAL_SERVER_ERROR);
             }
         }catch(DataAccessException e){
             body.put("message","No se pudo obtener los ciclos");
             body.put("error","Hubo un error: "+e.getMostSpecificCause());
-            responseEntity = new ResponseEntity<>(body, HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity<>(body, HttpStatus.INTERNAL_SERVER_ERROR);
         }
-        return responseEntity;
     }
 
     @GetMapping("/year")
@@ -92,18 +89,17 @@ public class UtilsController {
             if(yearList != null){
                 body.put("message","Se obtuvieron los años");
                 body.put("year",yearList);
-                responseEntity = new ResponseEntity<>(body, HttpStatus.OK);
+               return new ResponseEntity<>(body, HttpStatus.OK);
             }else{
                 body.put("message","No se pudo obtener los años");
                 body.put("error","Hubo un error");
-                responseEntity = new ResponseEntity<>(body, HttpStatus.INTERNAL_SERVER_ERROR);
+               return new ResponseEntity<>(body, HttpStatus.INTERNAL_SERVER_ERROR);
             }
         }catch(DataAccessException e){
             body.put("message","No se pudo obtener los años");
             body.put("error","Hubo un error: "+e.getMostSpecificCause());
-            responseEntity = new ResponseEntity<>(body, HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity<>(body, HttpStatus.INTERNAL_SERVER_ERROR);
         }
-        return responseEntity;
     }
 
     @GetMapping("/subjectspercareer/{idCareer}/{idCycle}")
@@ -113,18 +109,17 @@ public class UtilsController {
             if(subjectsPerCareerList != null){
                 body.put("message","Se obtuvieron las materias de la carrera");
                 body.put("subjectspercareer",subjectsPerCareerList);
-                responseEntity = new ResponseEntity<>(body, HttpStatus.OK);
+               return new ResponseEntity<>(body, HttpStatus.OK);
             }else{
                 body.put("message","No se pudo obtener las materias de la carrera");
                 body.put("error","Hubo un error");
-                responseEntity = new ResponseEntity<>(body, HttpStatus.INTERNAL_SERVER_ERROR);
+                return new ResponseEntity<>(body, HttpStatus.INTERNAL_SERVER_ERROR);
             }
         }catch(DataAccessException e){
             body.put("message","No se pudo obtener las materias de la carrera");
             body.put("error","Hubo un error: "+e.getMostSpecificCause());
-            responseEntity = new ResponseEntity<>(body, HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity<>(body, HttpStatus.INTERNAL_SERVER_ERROR);
         }
-        return responseEntity;
     }
 
     @GetMapping("/activity")
@@ -134,18 +129,17 @@ public class UtilsController {
             if(activityList != null){
                 body.put("message","Se obtuvieron las actividades");
                 body.put("activitiy",activityList);
-                responseEntity = new ResponseEntity<>(body, HttpStatus.OK);
+                return new ResponseEntity<>(body, HttpStatus.OK);
             }else{
                 body.put("message","No se pudo obtener las actividades");
                 body.put("error","Hubo un error");
-                responseEntity = new ResponseEntity<>(body, HttpStatus.INTERNAL_SERVER_ERROR);
+               return new ResponseEntity<>(body, HttpStatus.INTERNAL_SERVER_ERROR);
             }
         }catch(DataAccessException e){
             body.put("message","No se pudo obtener las actividades");
             body.put("error","Hubo un error: "+e.getMostSpecificCause());
-            responseEntity = new ResponseEntity<>(body, HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity<>(body, HttpStatus.INTERNAL_SERVER_ERROR);
         }
-        return responseEntity;
     }
 
     @GetMapping("/activitynumber")
@@ -155,18 +149,17 @@ public class UtilsController {
             if(activityNumberList != null){
                 body.put("message","Se obtuvo el numero de actividad");
                 body.put("activitiynumber",activityNumberList);
-                responseEntity = new ResponseEntity<>(body, HttpStatus.OK);
+                return new ResponseEntity<>(body, HttpStatus.OK);
             }else{
                 body.put("message","No se pudo el numero de actividad");
                 body.put("error","Hubo un error");
-                responseEntity = new ResponseEntity<>(body, HttpStatus.INTERNAL_SERVER_ERROR);
+                return new ResponseEntity<>(body, HttpStatus.INTERNAL_SERVER_ERROR);
             }
         }catch(DataAccessException e){
             body.put("message","No se pudo obtener el numero de actividad");
             body.put("error","Hubo un error: "+e.getMostSpecificCause());
-            responseEntity = new ResponseEntity<>(body, HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity<>(body, HttpStatus.INTERNAL_SERVER_ERROR);
         }
-        return responseEntity;
     }
 
 }
