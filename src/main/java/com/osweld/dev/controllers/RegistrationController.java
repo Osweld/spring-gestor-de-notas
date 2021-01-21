@@ -81,7 +81,7 @@ public class RegistrationController {
         return responseEntity;
     }
 
-    @GetMapping("/all/")
+    @GetMapping("/all")
     public ResponseEntity<Map<String,Object>> getAllUser(){
         ResponseEntity<Map<String,Object>> responseEntity = null;
         Map<String,Object> body = new HashMap<String,Object>();
