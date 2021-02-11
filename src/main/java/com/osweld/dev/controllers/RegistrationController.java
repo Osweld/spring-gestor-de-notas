@@ -30,7 +30,7 @@ public class RegistrationController {
 
 
 
-    @PostMapping("/user")
+    @PostMapping("/registration")
     private ResponseEntity<Map<String ,Object>> saveUser(@Valid @RequestBody User user, BindingResult result){
         Map<String, Object> body = new HashMap<String,Object>();
         if(result.hasErrors()){
@@ -60,7 +60,7 @@ public class RegistrationController {
         }
     }
 
-    @GetMapping("/user/one/{idUser}")
+    @GetMapping("/user/{idUser}")
     public ResponseEntity<Map<String,Object>> getUserById(@PathVariable Long idUser){
         Map<String,Object> body = new HashMap<String,Object>();
         try{
@@ -80,7 +80,7 @@ public class RegistrationController {
         }
     }
 /*
-    @GetMapping("/user/all")
+    @GetMapping("/users/all")
     public ResponseEntity<Map<String,Object>> getAllUser(){
         Map<String,Object> body = new HashMap<String,Object>();
         try{

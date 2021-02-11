@@ -76,7 +76,7 @@ public class TokenController {
         }
     }
 
-    @GetMapping("/token/activeaccount/{token}")
+    @PutMapping("/token/activeaccount/{token}")
     public ResponseEntity<Map<String,Object>> activeAccountToken(@PathVariable String token){
         Map<String,Object> body = new HashMap<>();
         try{
@@ -111,7 +111,7 @@ public class TokenController {
             return new ResponseEntity<>(body,HttpStatus.BAD_REQUEST);
         }
     }
-    @PostMapping("/token/resetpassword/{token}")
+    @PutMapping("/token/resetpassword/{token}")
     public ResponseEntity<Map<String,Object>> ResetPassword(@PathVariable String token, @RequestBody String password){
         Map<String,Object> body = new HashMap<>();
         try{

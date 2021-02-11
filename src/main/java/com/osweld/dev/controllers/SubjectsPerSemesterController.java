@@ -20,7 +20,7 @@ import java.util.stream.Collectors;
 @CrossOrigin
 @RestController
 @RequestMapping("/api")
-public class SubjectController {
+public class SubjectsPerSemesterController {
 
     @Autowired
     private SubjectsPerSemesterService subjectsPerSemesterService;
