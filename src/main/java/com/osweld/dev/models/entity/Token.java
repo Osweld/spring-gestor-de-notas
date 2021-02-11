@@ -14,6 +14,7 @@ import javax.persistence.OneToOne;
 import javax.persistence.PrePersist;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "tokens")
@@ -24,15 +25,20 @@ public class Token implements Serializable{
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id_token")
 	private Long id;
-	@NotEmpty
+	@NotEmpty(message = "Este campo no puede quedar vacio")
 	private String token;
 	@Column(name = "expiration_date")
 	private Date expirationDate;
+	@NotNull
+	private Boolean activated;
 	@Column(name = "create_at")
 	private Date createAt;
-	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "id_user")
+	@OneToOne(cascade = CascadeType.ALL)//Investigar mas sobre esto
+	@JoinColumn(name = "users_id_user")
 	private User user;
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "tokentype_id_tokentype")
+	private TokenType tokenType;
 
 	@PrePersist
 	public void prePersist(){
@@ -43,12 +49,22 @@ public class Token implements Serializable{
 	
 	}
 
-	public Token(Long id, @NotEmpty String token, Date expirationDate, Date createAt, User user) {
+	public Token(Long id, @NotEmpty String token, Date expirationDate,Boolean activated, Date createAt, User user,TokenType tokenType) {
 		this.id = id;
 		this.token = token;
 		this.expirationDate = expirationDate;
+		this.activated = activated;
 		this.createAt = createAt;
 		this.user = user;
+		this.tokenType = tokenType;
+	}
+
+	public Token(String token,Boolean activated, Date expirationDate,User user,TokenType tokenType) {
+		this.token = token;
+		this.activated = activated;
+		this.expirationDate = expirationDate;
+		this.user = user;
+		this.tokenType = tokenType;
 	}
 
 	public Long getId() {
@@ -75,6 +91,14 @@ public class Token implements Serializable{
 		this.expirationDate = expirationDate;
 	}
 
+	public Boolean getActivated() {
+		return activated;
+	}
+
+	public void setActivated(Boolean activated) {
+		this.activated = activated;
+	}
+
 	public Date getCreateAt() {
 		return createAt;
 	}
@@ -90,8 +114,25 @@ public class Token implements Serializable{
 	public void setUser(User user) {
 		this.user = user;
 	}
-	
-	
+
+	public TokenType getTokenType() {
+		return tokenType;
+	}
+
+	public void setTokenType(TokenType tokenType) {
+		this.tokenType = tokenType;
+	}
+
+	@Override
+	public String toString() {
+		return "Token{" +
+				"id=" + id +
+				", token='" + token + '\'' +
+				", expirationDate=" + expirationDate +
+				", activated=" + activated +
+				", createAt=" + createAt +
+				'}';
+	}
 }
 	
 	

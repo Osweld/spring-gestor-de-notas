@@ -15,7 +15,7 @@ import javax.persistence.PrePersist;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "subjectsPerSemester")
+@Table(name = "subjectspersemester")
 public class SubjectsPerSemester implements Serializable{
 
 	private static final long serialVersionUID = 1L;
@@ -27,10 +27,10 @@ public class SubjectsPerSemester implements Serializable{
 	@Column(name = "create_at")
 	private Date createAt;
 	@ManyToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "id_semester")
+	@JoinColumn(name = "semesters_id_semester")
 	private Semester semester;
 	@ManyToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "id_subjects_per_career")
+	@JoinColumn(name = "subjectspercareer_id_subjects_per_career")
 	private SubjectsPerCareer subjectsPerCareer;
 	
 
@@ -97,9 +97,13 @@ public class SubjectsPerSemester implements Serializable{
 	public void setSubjectsPerCareer(SubjectsPerCareer subjectsPerCareer) {
 		this.subjectsPerCareer = subjectsPerCareer;
 	}
-	
-	
-	
-	
 
+
+	@Override
+	public String toString() {
+		return "SubjectsPerSemester{" +
+				"id=" + id +
+				", createAt=" + createAt +
+				'}';
+	}
 }

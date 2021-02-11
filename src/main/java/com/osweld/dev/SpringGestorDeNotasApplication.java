@@ -13,7 +13,7 @@ public class SpringGestorDeNotasApplication {
 	}
 	
 	@Bean
-	private BCryptPasswordEncoder passwordEncoder() {
+	public BCryptPasswordEncoder passwordEncoder() {
 		return new BCryptPasswordEncoder();
 	}
 

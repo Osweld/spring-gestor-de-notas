@@ -22,7 +22,7 @@ public class Career implements Serializable{
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id_career")
 	private Long id;
-	@NotEmpty
+	@NotEmpty(message = "Este campo no puede quedar vacio")
 	private String career;
 	@Column(name = "create_at")
 	private Date createAt;
@@ -72,10 +72,14 @@ public class Career implements Serializable{
 	public void setCreateAt(Date createAt) {
 		this.createAt = createAt;
 	}
-	
-	
-	
-	
-	
-	
+
+
+	@Override
+	public String toString() {
+		return "Career{" +
+				"id=" + id +
+				", career='" + career + '\'' +
+				", createAt=" + createAt +
+				'}';
+	}
 }

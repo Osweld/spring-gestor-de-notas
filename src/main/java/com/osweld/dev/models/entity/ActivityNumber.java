@@ -13,7 +13,7 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
 @Entity
-@Table(name = "activityNumber")
+@Table(name = "activitynumber")
 public class ActivityNumber implements Serializable{
 
 	private static final long serialVersionUID = 1L;
@@ -22,7 +22,7 @@ public class ActivityNumber implements Serializable{
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id_activity_number")
 	private Long id;
-	@NotNull
+	@NotNull(message = "Este campo no puede quedar vacio")
 	private Short number;
 	@Column(name = "create_at")
 	private Date createAt;
@@ -81,9 +81,14 @@ public class ActivityNumber implements Serializable{
 	public void setCreateAt(Date createAt) {
 		this.createAt = createAt;
 	}
-	
-	
-	
-	
-	
+
+
+	@Override
+	public String toString() {
+		return "ActivityNumber{" +
+				"id=" + id +
+				", number=" + number +
+				", createAt=" + createAt +
+				'}';
+	}
 }

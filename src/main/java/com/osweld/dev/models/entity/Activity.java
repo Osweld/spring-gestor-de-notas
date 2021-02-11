@@ -22,7 +22,7 @@ public class Activity implements Serializable{
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id_activity")//Hay que cambiarlo por activity mas adelante
 	private Long id;
-	@NotEmpty
+	@NotEmpty(message = "Este campo no puede quedar vacio")
 	private String activity;
 	@Column(name = "create_at")
 	private Date createAt;
@@ -39,9 +39,6 @@ public class Activity implements Serializable{
 	
 	}
 	
-	
-
-
 
 	public Activity(Long id) {
 		this.id = id;
@@ -85,6 +82,13 @@ public class Activity implements Serializable{
 	public void setCreateAt(Date createAt) {
 		this.createAt = createAt;
 	}
-	
-	
+
+	@Override
+	public String toString() {
+		return "Activity{" +
+				"id=" + id +
+				", activity='" + activity + '\'' +
+				", createAt=" + createAt +
+				'}';
+	}
 }

@@ -10,8 +10,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.PrePersist;
 import javax.persistence.Table;
-
-import com.sun.istack.NotNull;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "years")
@@ -22,9 +21,9 @@ public class Year implements Serializable{
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id_year")
 	private Long id;
-	@NotNull
+	@NotNull(message = "Este campo no puede quedar vacio")
 	private Integer year;
-	@Column(name = "creat_at")
+	@Column(name = "create_at")
 	private Date createAt;
 
 	@PrePersist
@@ -70,8 +69,13 @@ public class Year implements Serializable{
 	public void setCreateAt(Date createAt) {
 		this.createAt = createAt;
 	}
-	
-	
-	
-	
+
+	@Override
+	public String toString() {
+		return "Year{" +
+				"id=" + id +
+				", year=" + year +
+				", createAt=" + createAt +
+				'}';
+	}
 }

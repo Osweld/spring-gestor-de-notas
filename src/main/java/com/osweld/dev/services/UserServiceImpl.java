@@ -38,6 +38,7 @@ public class UserServiceImpl implements UserService{
 	}
 
 	@Override
+	@Transactional()
 	public User saveUser(User user) {
 		Person person = personRepository.save(user.getPerson());
 		if(person == null) return null;
@@ -49,9 +50,16 @@ public class UserServiceImpl implements UserService{
 	}
 
 	@Override
+	@Transactional()
 	public void deleteUser(Long userId) {
 		userRepository.deleteById(userId);
 		
+	}
+
+	@Override
+	@Transactional(readOnly = true)
+	public User getUserByEmail(String email) {
+		return userRepository.findByEmail(email);
 	}
 
 }

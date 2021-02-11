@@ -25,7 +25,7 @@ public class Rol implements Serializable{
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id_rol")
 	private Long id;
-	@NotEmpty
+	@NotEmpty(message = "Este campo no puede quedar vacio")
 	private String rol;
 	@Column(name = "create_at")
 	private Date createAt;
@@ -76,10 +76,12 @@ public class Rol implements Serializable{
 	}
 
 
-	
-	
-	
-	
-	
-	
+	@Override
+	public String toString() {
+		return "Rol{" +
+				"id=" + id +
+				", rol='" + rol + '\'' +
+				", createAt=" + createAt +
+				'}';
+	}
 }

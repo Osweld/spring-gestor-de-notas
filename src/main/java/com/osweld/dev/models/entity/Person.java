@@ -17,10 +17,9 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 
 import org.springframework.format.annotation.DateTimeFormat;
-
-import com.sun.istack.NotNull;
 
 @Entity
 @Table(name="persons")
@@ -32,24 +31,24 @@ public class Person implements Serializable{
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name = "id_person")
 	private Long id;
-	@NotEmpty
+	@NotEmpty(message = "Este campo no puede quedar vacio")
 	private String name;
-	@NotEmpty
+	@NotEmpty(message = "Este campo no puede quedar vacio")
 	private String lastname;
-	@NotNull
+	@NotNull(message = "Este campo no puede quedar vacio")
 	@Temporal(value = TemporalType.DATE)
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date birthdate;
-	@NotEmpty
-	@Email
+	@NotEmpty(message = "Este campo no puede quedar vacio")
+	@Email(message = "El email no es valido")
 	@Column(unique = true)
 	private String email;
-	@NotEmpty
+	@NotEmpty(message = "Este campo no puede quedar vacio")
 	private String gender;
 	@Column(name = "create_at")
 	private Date createAt;
 	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "id_career")
+	@JoinColumn(name = "careers_id_career")
 	private Career career;
 
 	@PrePersist
@@ -142,7 +141,17 @@ public class Person implements Serializable{
 	public void setCareer(Career career) {
 		this.career = career;
 	}
-	
-	
-	
+
+	@Override
+	public String toString() {
+		return "Person{" +
+				"id=" + id +
+				", name='" + name + '\'' +
+				", lastname='" + lastname + '\'' +
+				", birthdate=" + birthdate +
+				", email='" + email + '\'' +
+				", gender='" + gender + '\'' +
+				", createAt=" + createAt +
+				'}';
+	}
 }

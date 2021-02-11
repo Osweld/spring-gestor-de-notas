@@ -31,21 +31,21 @@ public class User implements Serializable{
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id_user")
 	private Long id;
-	@NotEmpty
+	@NotEmpty(message = "Este campo no puede quedar vacio")
 	@Column(unique = true)
 	private String username;
-	@NotEmpty
+	@NotEmpty(message = "Este campo no puede quedar vacio")
 	private String password;
-	@NotNull
+	@NotNull(message = "Este campo no puede quedar vacio")
 	private Boolean active;
 	@Column(name = "create_at")
 	private Date createAt;
 	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "id_person")
+	@JoinColumn(name = "persons_id_person")
 	@Valid
 	private Person person;
 	@ManyToOne()
-	@JoinColumn(name = "id_rol")
+	@JoinColumn(name = "role_id_rol")
 	Rol rol;
 
 	@PrePersist
@@ -127,8 +127,16 @@ public class User implements Serializable{
 	public void setRol(Rol rol) {
 		this.rol = rol;
 	}
-	
-	
-	
-	
+
+
+	@Override
+	public String toString() {
+		return "User{" +
+				"id=" + id +
+				", username='" + username + '\'' +
+				", password='" + password + '\'' +
+				", active=" + active +
+				", createAt=" + createAt +
+				'}';
+	}
 }

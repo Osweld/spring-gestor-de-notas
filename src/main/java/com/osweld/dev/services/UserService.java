@@ -9,6 +9,7 @@ public interface UserService {
 	public User getUser(Long userId);
 	public List<User> getAllUser();
 	public User saveUser(User user);
-	public void deleteUser(Long userId); 
-	
+	public void deleteUser(Long userId);
+	public User getUserByEmail(String email);
+
 }

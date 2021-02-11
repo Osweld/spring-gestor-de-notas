@@ -29,21 +29,23 @@ public class Assignment implements Serializable{
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id_assignment")
 	private Long id;
-	@NotNull
+	@NotNull(message = "Este campo no puede quedar vacio")
 	private Short percent;
-	@DecimalMax(value = "10")
-	@DecimalMin(value = "0")
+	@DecimalMax(value = "10",message = "No puede ser mayor a 10")
+	@DecimalMin(value = "0",message = "No puede ser menor a 0")
 	private Double score;
+	@NotNull(message = "No puede estar vacio")
+	private Boolean finish;
 	@Column(name = "create_at")
 	private Date createAt;
 	@ManyToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "id_subjects_per_semester")
+	@JoinColumn(name = "subjectspersemester_id_subjects_per_semester")
 	private SubjectsPerSemester subjectsPerSemester;
 	@ManyToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "id_activity")
+	@JoinColumn(name = "activities_id_activity")
 	private Activity activity;
 	@ManyToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "id_activity_number")
+	@JoinColumn(name = "activitynumber_id_activity_number")
 	private ActivityNumber activityNumber;
 	
 	@PrePersist
@@ -62,7 +64,7 @@ public class Assignment implements Serializable{
 	}
 
 	public Assignment(Long id, @NotNull Short percent, @DecimalMax("10") @DecimalMin("0") Double score, Date createAt,
-			SubjectsPerSemester subjectsPerSemester, Activity activity, ActivityNumber activityNumber) {
+			Boolean finish, SubjectsPerSemester subjectsPerSemester, Activity activity, ActivityNumber activityNumber) {
 		this.id = id;
 		this.percent = percent;
 		this.score = score;
@@ -70,6 +72,7 @@ public class Assignment implements Serializable{
 		this.subjectsPerSemester = subjectsPerSemester;
 		this.activity = activity;
 		this.activityNumber = activityNumber;
+		this.finish = finish;
 	}
 
 	public Long getId() {
@@ -112,6 +115,14 @@ public class Assignment implements Serializable{
 		this.subjectsPerSemester = subjectsPerSemester;
 	}
 
+	public Boolean getFinish() {
+		return finish;
+	}
+
+	public void setFinish(Boolean finish) {
+		this.finish = finish;
+	}
+
 	public Activity getActivity() {
 		return activity;
 	}
@@ -127,9 +138,16 @@ public class Assignment implements Serializable{
 	public void setActivityNumber(ActivityNumber activityNumber) {
 		this.activityNumber = activityNumber;
 	}
-	
-	
-	
-	
 
+
+	@Override
+	public String toString() {
+		return "Assignment{" +
+				"id=" + id +
+				", percent=" + percent +
+				", score=" + score +
+				", finish=" + finish +
+				", createAt=" + createAt +
+				'}';
+	}
 }

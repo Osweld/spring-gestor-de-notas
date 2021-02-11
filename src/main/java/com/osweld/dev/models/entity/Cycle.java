@@ -10,8 +10,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.PrePersist;
 import javax.persistence.Table;
-
-import com.sun.istack.NotNull;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "cycles")
@@ -23,7 +22,7 @@ public class Cycle implements Serializable{
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id_cycle")
 	private Long id;
-	@NotNull
+	@NotNull(message = "Este campo no puede quedar vacio")
 	private String cycle;
 	@Column(name = "create_at")
 	private Date createAt;
@@ -72,9 +71,14 @@ public class Cycle implements Serializable{
 	public void setCreateAt(Date createAt) {
 		this.createAt = createAt;
 	}
-	
-	
-	
-	
-	
+
+
+	@Override
+	public String toString() {
+		return "Cycle{" +
+				"id=" + id +
+				", cycle='" + cycle + '\'' +
+				", createAt=" + createAt +
+				'}';
+	}
 }

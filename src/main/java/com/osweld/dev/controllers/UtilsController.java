@@ -6,15 +6,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+@CrossOrigin()
 @RestController
 @RequestMapping("/api/utils")
 public class UtilsController {
@@ -38,126 +36,123 @@ public class UtilsController {
     private ActivityNumberService activityNumberService;
 
 
-    private Map<String,Object> body = new HashMap<>();
-
     @GetMapping("/career")
     public ResponseEntity<Map<String,Object>> getAllCareer(){
 
         Map<String,Object> body = new HashMap<>();
         try{
             List<Career> careerList = careerService.getallCareer();
-            if(careerList != null){
-                body.put("message","Se obtuvieron las carreras");
+            if(careerList.size() > 0){
+                body.put("success","Se obtuvieron las carreras");
                 body.put("career",careerList);
                 return new ResponseEntity<>(body, HttpStatus.OK);
             }else{
-                body.put("message","No se pudo obtener las carreras");
-                body.put("error","Hubo un error");
+                body.put("error","No se pudo obtener las carreras");
                 return new ResponseEntity<>(body, HttpStatus.INTERNAL_SERVER_ERROR);
             }
         }catch(DataAccessException e){
-            body.put("message","No se pudo obtener las carreras");
-            body.put("error","Hubo un error: "+e.getMostSpecificCause());
+            body.put("error","No se pudo obtener las carreras");
+            body.put("log","Hubo un error: "+e.getMostSpecificCause());
             return new ResponseEntity<>(body, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
     @GetMapping("/cycle")
     public ResponseEntity<Map<String,Object>> getAllCycle(){
+        Map<String,Object> body = new HashMap<>();
         try{
             List<Cycle> cycleList = cycleService.getAllCycle();
-            if(cycleList != null){
-                body.put("message","Se obtuvieron los ciclos");
+            if(cycleList.size() > 0){
+                body.put("success","Se obtuvieron los ciclos");
                 body.put("cycle",cycleList);
                 return new ResponseEntity<>(body, HttpStatus.OK);
             }else{
-                body.put("message","No se pudo obtener los ciclos");
-                body.put("error","Hubo un error");
+                body.put("error","No se pudo obtener los ciclos");
                 return new ResponseEntity<>(body, HttpStatus.INTERNAL_SERVER_ERROR);
             }
         }catch(DataAccessException e){
-            body.put("message","No se pudo obtener los ciclos");
-            body.put("error","Hubo un error: "+e.getMostSpecificCause());
+            body.put("error","No se pudo obtener los ciclos");
+            body.put("log","Hubo un error: "+e.getMostSpecificCause());
             return new ResponseEntity<>(body, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
     @GetMapping("/year")
     public ResponseEntity<Map<String,Object>> getAllYear(){
+        Map<String,Object> body = new HashMap<>();
         try{
             List<Year> yearList = yearService.getAllYear();
-            if(yearList != null){
-                body.put("message","Se obtuvieron los años");
+            if(yearList.size() > 0){
+                body.put("success","Se obtuvieron los años");
                 body.put("year",yearList);
                return new ResponseEntity<>(body, HttpStatus.OK);
             }else{
-                body.put("message","No se pudo obtener los años");
-                body.put("error","Hubo un error");
+                body.put("error","No se pudo obtener los años");
                return new ResponseEntity<>(body, HttpStatus.INTERNAL_SERVER_ERROR);
             }
         }catch(DataAccessException e){
-            body.put("message","No se pudo obtener los años");
-            body.put("error","Hubo un error: "+e.getMostSpecificCause());
+            body.put("error","No se pudo obtener los años");
+            body.put("log","Hubo un error: "+e.getMostSpecificCause());
             return new ResponseEntity<>(body, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
     @GetMapping("/subjectspercareer/{idCareer}/{idCycle}")
     public ResponseEntity<Map<String,Object>> getAllSubjectsPerCareer(@PathVariable Long idCareer,@PathVariable Long idCycle){
+        Map<String,Object> body = new HashMap<>();
         try{
            List<SubjectsPerCareer> subjectsPerCareerList = subjectsPerCareerService.getAllSubjectsPerCareerByCareerAndCycle(idCareer,idCycle);
-            if(subjectsPerCareerList != null){
-                body.put("message","Se obtuvieron las materias de la carrera");
-                body.put("subjectspercareer",subjectsPerCareerList);
+            if(subjectsPerCareerList.size() > 0){
+                body.put("success","Se obtuvieron las materias de la carrera");
+                body.put("subjectsPerCareer",subjectsPerCareerList);
                return new ResponseEntity<>(body, HttpStatus.OK);
             }else{
-                body.put("message","No se pudo obtener las materias de la carrera");
-                body.put("error","Hubo un error");
+                body.put("error","No se pudo obtener las materias de la carrera");
                 return new ResponseEntity<>(body, HttpStatus.INTERNAL_SERVER_ERROR);
             }
         }catch(DataAccessException e){
-            body.put("message","No se pudo obtener las materias de la carrera");
-            body.put("error","Hubo un error: "+e.getMostSpecificCause());
+            body.put("error","No se pudo obtener las materias de la carrera");
+            body.put("log","Hubo un error: "+e.getMostSpecificCause());
             return new ResponseEntity<>(body, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
     @GetMapping("/activity")
     public ResponseEntity<Map<String,Object>> getAllActivity(){
+        Map<String,Object> body = new HashMap<>();
         try{
             List<Activity> activityList = activityService.getAllActivity();
-            if(activityList != null){
-                body.put("message","Se obtuvieron las actividades");
-                body.put("activitiy",activityList);
+            if(activityList.size() > 0){
+                body.put("success","Se obtuvieron las actividades");
+                body.put("activity",activityList);
                 return new ResponseEntity<>(body, HttpStatus.OK);
             }else{
-                body.put("message","No se pudo obtener las actividades");
-                body.put("error","Hubo un error");
+                body.put("error","No se pudo obtener las actividades");
                return new ResponseEntity<>(body, HttpStatus.INTERNAL_SERVER_ERROR);
             }
         }catch(DataAccessException e){
-            body.put("message","No se pudo obtener las actividades");
-            body.put("error","Hubo un error: "+e.getMostSpecificCause());
+            body.put("error","No se pudo obtener las actividades");
+            body.put("log","Hubo un error: "+e.getMostSpecificCause());
             return new ResponseEntity<>(body, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
     @GetMapping("/activitynumber")
     public ResponseEntity<Map<String,Object>> getAllActivityNumber(){
+        Map<String,Object> body = new HashMap<>();
         try{
             List<ActivityNumber> activityNumberList = activityNumberService.getAllActivityNumber();
-            if(activityNumberList != null){
-                body.put("message","Se obtuvo el numero de actividad");
-                body.put("activitiynumber",activityNumberList);
+            if(activityNumberList.size() > 0){
+                body.put("success","Se obtuvo el numero de actividad");
+                body.put("activityNumber",activityNumberList);
                 return new ResponseEntity<>(body, HttpStatus.OK);
             }else{
-                body.put("message","No se pudo el numero de actividad");
-                body.put("error","Hubo un error");
+                body.put("error","No se pudo el numero de actividad");
                 return new ResponseEntity<>(body, HttpStatus.INTERNAL_SERVER_ERROR);
             }
         }catch(DataAccessException e){
-            body.put("message","No se pudo obtener el numero de actividad");
-            body.put("error","Hubo un error: "+e.getMostSpecificCause());
+            body.put("error","No se pudo obtener el numero de actividad");
+            body.put("log","Hubo un error: "+e.getMostSpecificCause());
             return new ResponseEntity<>(body, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }

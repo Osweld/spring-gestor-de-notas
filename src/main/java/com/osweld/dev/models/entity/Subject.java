@@ -13,7 +13,7 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
 
 @Entity
-@Table(name = "subjetcs")
+@Table(name = "subjects")
 public class Subject implements Serializable{
 
 
@@ -23,8 +23,8 @@ public class Subject implements Serializable{
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id_subject")
 	private Long id;
-	@NotEmpty
-	private String career;
+	@NotEmpty(message = "Este campo no puede quedar vacio")
+	private String subject;
 	@Column(name = "create_at")
 	private Date createAt;
 
@@ -42,9 +42,9 @@ public class Subject implements Serializable{
 		this.id = id;
 	}
 
-	public Subject(Long id, @NotEmpty String career, Date createAt) {
+	public Subject(Long id, @NotEmpty String subject, Date createAt) {
 		this.id = id;
-		this.career = career;
+		this.subject = subject;
 		this.createAt = createAt;
 	}
 
@@ -56,12 +56,12 @@ public class Subject implements Serializable{
 		this.id = id;
 	}
 
-	public String getCareer() {
-		return career;
+	public String getSubject() {
+		return subject;
 	}
 
-	public void setCareer(String career) {
-		this.career = career;
+	public void setSubject(String subject) {
+		this.subject = subject;
 	}
 
 	public Date getCreateAt() {
@@ -71,10 +71,14 @@ public class Subject implements Serializable{
 	public void setCreateAt(Date createAt) {
 		this.createAt = createAt;
 	}
-	
-	
-	
-	
-	
-	
+
+
+	@Override
+	public String toString() {
+		return "Subject{" +
+				"id=" + id +
+				", subject='" + subject + '\'' +
+				", createAt=" + createAt +
+				'}';
+	}
 }

@@ -28,13 +28,13 @@ public class Semester implements Serializable{
 	private Date createAt;
 	
 	@ManyToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "id_user")
+	@JoinColumn(name = "users_id_user")
 	private User user;
 	@ManyToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "id_year")
+	@JoinColumn(name = "years_id_year")
 	private Year year;
 	@ManyToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "id_cycle")
+	@JoinColumn(name = "cycles_id_cycle")
 	private Cycle cycle;
 
 	@PrePersist
@@ -97,8 +97,13 @@ public class Semester implements Serializable{
 	public void setCycle(Cycle cycle) {
 		this.cycle = cycle;
 	}
-	
-	
-	
-	
+
+
+	@Override
+	public String toString() {
+		return "Semester{" +
+				"id=" + id +
+				", createAt=" + createAt +
+				'}';
+	}
 }
