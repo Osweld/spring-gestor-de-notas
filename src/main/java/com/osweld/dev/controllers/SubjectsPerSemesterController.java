@@ -26,23 +26,22 @@ public class SubjectsPerSemesterController {
     private SubjectsPerSemesterService subjectsPerSemesterService;
 
     @PostMapping("/subjectspersemester/{subjectsPerCareerId}/{semesterId}")
-    public ResponseEntity<Map<String,Object>> saveSubject(@Valid @RequestBody SubjectsPerSemester subjectsPerSemester, BindingResult result,
-                                                           @PathVariable Long subjectsPerCareerId,@PathVariable Long semesterId,
+    public ResponseEntity<Map<String,Object>> saveSubject(@PathVariable Long subjectsPerCareerId,@PathVariable Long semesterId,
                                                            Authentication auth){
         Map<String,Object > body = new HashMap<>();
-        if(result.hasErrors()){
-            Map<String,String> errors = result.getFieldErrors().stream()
-                    .collect(Collectors.
-                            toMap(error -> error.getField(),error -> error.getDefaultMessage()));
-            body.put("errors",errors);
-            body.put("error","Hubo un problema al crear la materia");
-            return new ResponseEntity<>(body, HttpStatus.BAD_REQUEST);
-        }
+//        if(result.hasErrors()){
+//            Map<String,String> errors = result.getFieldErrors().stream()
+//                    .collect(Collectors.
+//                            toMap(error -> error.getField(),error -> error.getDefaultMessage()));
+//            body.put("errors",errors);
+//            body.put("error","Hubo un problema al crear la materia");
+//            return new ResponseEntity<>(body, HttpStatus.BAD_REQUEST);
+//        }
 
         try{
             Long userId = (Long)auth.getPrincipal();
             SubjectsPerSemester subjectsPerSemesterDB =
-                    subjectsPerSemesterService.saveSubjectsPerSemester(subjectsPerSemester,subjectsPerCareerId,semesterId,userId);
+                    subjectsPerSemesterService.saveSubjectsPerSemester(subjectsPerCareerId,semesterId,userId);
             if(subjectsPerSemesterDB != null){
                 body.put("success","Materia guardado exitosamente");
                 body.put("subjectsPerSemester",subjectsPerSemesterDB);

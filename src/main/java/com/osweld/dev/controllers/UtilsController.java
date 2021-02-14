@@ -2,7 +2,10 @@ package com.osweld.dev.controllers;
 
 import com.osweld.dev.models.entity.*;
 import com.osweld.dev.services.*;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.dao.DataAccessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -35,9 +38,16 @@ public class UtilsController {
     @Autowired
     private ActivityNumberService activityNumberService;
 
+    private Logger log = LoggerFactory.getLogger(getClass());
+
+    @Value(value = "${spring.mail.username}")
+    private String from;
+
 
     @GetMapping("/career")
     public ResponseEntity<Map<String,Object>> getAllCareer(){
+        log.info("Este es el from: "+from);
+
 
         Map<String,Object> body = new HashMap<>();
         try{

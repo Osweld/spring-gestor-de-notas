@@ -1,5 +1,8 @@
 package com.osweld.dev.models.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import java.io.Serializable;
 import java.util.Date;
 
@@ -26,14 +29,15 @@ public class Semester implements Serializable{
 	private Long id;
 	@Column(name = "create_at")
 	private Date createAt;
-	
-	@ManyToOne(cascade = CascadeType.ALL)
+
+	@JsonIgnore()
+	@ManyToOne()
 	@JoinColumn(name = "users_id_user")
 	private User user;
-	@ManyToOne(cascade = CascadeType.ALL)
+	@ManyToOne()
 	@JoinColumn(name = "years_id_year")
 	private Year year;
-	@ManyToOne(cascade = CascadeType.ALL)
+	@ManyToOne()
 	@JoinColumn(name = "cycles_id_cycle")
 	private Cycle cycle;
 

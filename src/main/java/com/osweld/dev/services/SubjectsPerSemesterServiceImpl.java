@@ -21,6 +21,11 @@ public class SubjectsPerSemesterServiceImpl implements SubjectsPerSemesterServic
 	@Autowired
 	private SemesterRepository semesterRepository;
 
+	@Autowired
+	private SubjectsPerCareerService subjectsPerCareerService;
+
+
+
 	@Override
 	@Transactional(readOnly = true)
 	public SubjectsPerSemester getSubjectsPerSemester(Long subjectsPerSemesterId, Long userId) {
@@ -37,13 +42,19 @@ public class SubjectsPerSemesterServiceImpl implements SubjectsPerSemesterServic
 
 	@Override
 	@Transactional
-	public SubjectsPerSemester saveSubjectsPerSemester(SubjectsPerSemester subjectsPerSemester,
-			Long subjectsPerCareerId, Long semesterId, Long userId) {
+	public SubjectsPerSemester saveSubjectsPerSemester(Long subjectsPerCareerId, Long semesterId, Long userId) {
+
 		if(subjectsPerCareerId == null || semesterId == null || userId == null) return null;
+
+		SubjectsPerSemester subjectsPerSemester = new SubjectsPerSemester();
 		Semester semester = semesterRepository.findById(semesterId, userId);
+		SubjectsPerCareer subjectsPerCareer = subjectsPerCareerService.getSubjectsPerCareer(subjectsPerCareerId);
+
+		if(semester == null || subjectsPerCareer == null
+				|| semester.getCycle().getId() != subjectsPerCareer.getCycle().getId()) return null;
+
 		subjectsPerSemester.setSemester(semester);
-		subjectsPerSemester.setSubjectsPerCareer(new SubjectsPerCareer(subjectsPerCareerId));
-		
+		subjectsPerSemester.setSubjectsPerCareer(subjectsPerCareer);
 		return subjectsPerSemesterRepository.save(subjectsPerSemester);
 	}
 

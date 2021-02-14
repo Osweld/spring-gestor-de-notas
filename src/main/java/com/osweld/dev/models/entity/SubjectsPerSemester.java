@@ -26,10 +26,10 @@ public class SubjectsPerSemester implements Serializable{
 	private Long id;
 	@Column(name = "create_at")
 	private Date createAt;
-	@ManyToOne(cascade = CascadeType.ALL)
+	@ManyToOne()
 	@JoinColumn(name = "semesters_id_semester")
 	private Semester semester;
-	@ManyToOne(cascade = CascadeType.ALL)
+	@ManyToOne()
 	@JoinColumn(name = "subjectspercareer_id_subjects_per_career")
 	private SubjectsPerCareer subjectsPerCareer;
 	

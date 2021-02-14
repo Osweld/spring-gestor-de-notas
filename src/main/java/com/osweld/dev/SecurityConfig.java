@@ -36,7 +36,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		http.authorizeRequests().antMatchers("/api/utils/career/**","/api/token/**","/api/registration").permitAll()
+		http.authorizeRequests().antMatchers("/api/utils/career/**","/api/token/**","/api/registration/**").permitAll()
 		.antMatchers("/**").hasAnyRole("USER").anyRequest().authenticated().and()
 		.addFilter(new JWTAuthenticationFilter(authenticationManager(), jwtService))
 		.addFilter(new JWTAuthorizationFilter(authenticationManager(), jwtService))

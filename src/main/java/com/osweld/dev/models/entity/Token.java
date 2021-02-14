@@ -33,10 +33,10 @@ public class Token implements Serializable{
 	private Boolean activated;
 	@Column(name = "create_at")
 	private Date createAt;
-	@OneToOne(cascade = CascadeType.ALL)//Investigar mas sobre esto
+	@OneToOne()//Investigar mas sobre esto
 	@JoinColumn(name = "users_id_user")
 	private User user;
-	@OneToOne(cascade = CascadeType.ALL)
+	@OneToOne()
 	@JoinColumn(name = "tokentype_id_tokentype")
 	private TokenType tokenType;
 

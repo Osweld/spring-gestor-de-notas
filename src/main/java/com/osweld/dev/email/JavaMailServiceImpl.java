@@ -15,7 +15,8 @@ public class JavaMailServiceImpl implements JavaMailService{
 
     @Autowired
     private JavaMailSender javaMail;
-    @Value(value = "spring.mail.username")
+
+    @Value(value = "${spring.mail.username}")
     private String from;
 
     @Override
@@ -30,7 +31,7 @@ public class JavaMailServiceImpl implements JavaMailService{
             helper.setFrom(from);
             helper.setTo(to);
             helper.setSubject("Activar Cuenta");
-            helper.setText(HTMLTemplate(id,text));
+            helper.setText(HTMLTemplate(id,text),true);
             javaMail.send(mimeMessage);
         } catch (MessagingException e) {
             e.printStackTrace();
@@ -50,15 +51,16 @@ public class JavaMailServiceImpl implements JavaMailService{
             helper.setFrom(from);
             helper.setTo(to);
             helper.setSubject("Cambio de contraseña");
-            helper.setText(HTMLTemplate(id,text));
+            helper.setText(HTMLTemplate(id,text),true);
             javaMail.send(mimeMessage);
         } catch (MessagingException e) {
+
             e.printStackTrace();
         }
     }
 
     private String HTMLTemplate(String id,String text){
-        return "<h1>Cambio de contraseña<h1>"+
+        return "<h1>Cambio de contraseña</h1>"+
                 "<p> "+text+" </p>"+
                 "<a href=\"www.sitioweb.com/token/"+id+"\">Activar cuenta</a>";
     }

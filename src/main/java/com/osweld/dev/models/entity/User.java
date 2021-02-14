@@ -36,7 +36,6 @@ public class User implements Serializable{
 	private String username;
 	@NotEmpty(message = "Este campo no puede quedar vacio")
 	private String password;
-	@NotNull(message = "Este campo no puede quedar vacio")
 	private Boolean active;
 	@Column(name = "create_at")
 	private Date createAt;

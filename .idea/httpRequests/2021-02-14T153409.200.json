@@ -1,0 +1,10 @@
+{
+  "career": [
+    {
+      "id": 1,
+      "career": "Ingenieria en sistemas informaticos",
+      "createAt": "2020-11-17T06:00:00.000+00:00"
+    }
+  ],
+  "success": "Se obtuvieron las carreras"
+}

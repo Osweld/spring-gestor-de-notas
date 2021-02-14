@@ -25,25 +25,24 @@ public class SemesterController {
     private SemesterService semesterService;
 
     @PostMapping("/semester/{cycleId}/{yearId}")
-    public ResponseEntity<Map<String,Object>> saveSemester(@Valid @RequestBody Semester semester, BindingResult result,
-                                                            @PathVariable Long cycleId, @PathVariable Long yearId,
+    public ResponseEntity<Map<String,Object>> saveSemester(@PathVariable Long cycleId, @PathVariable Long yearId,
                                                             Authentication auth){
-        Map<String,Object > body = new HashMap<>();
-        if(result.hasErrors()){
-            Map<String,String> errors = result.getFieldErrors().stream()
-                    .collect(Collectors.
-                            toMap(error -> error.getField(),error -> error.getDefaultMessage()));
-            body.put("errors",errors);
-            body.put("error","Hubo un problema al crear el usuario");
-            return new ResponseEntity<>(body, HttpStatus.BAD_REQUEST);
-        }
+          Map<String,Object > body = new HashMap<>();
+//        if(result.hasErrors()){
+//            Map<String,String> errors = result.getFieldErrors().stream()
+//                    .collect(Collectors.
+//                            toMap(error -> error.getField(),error -> error.getDefaultMessage()));
+//            body.put("errors",errors);
+//            body.put("error","Hubo un problema al crear el usuario");
+//            return new ResponseEntity<>(body, HttpStatus.BAD_REQUEST);
+//        }
 
         try{
             Long userId = (Long)auth.getPrincipal();
-            Semester semesterDB = semesterService.saveSemester(semester,cycleId,yearId,userId);
+            Semester semesterDB = semesterService.saveSemester(cycleId,yearId,userId);
             if(semesterDB != null){
                 body.put("success","Semestre guardado exitosamente");
-                body.put("semester",semesterDB);
+                //body.put("semester",semesterDB);
                 return new ResponseEntity<>(body, HttpStatus.CREATED);
             }else{
                 body.put("error","No se pudo crear el semestre");

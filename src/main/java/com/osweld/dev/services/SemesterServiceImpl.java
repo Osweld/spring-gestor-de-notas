@@ -30,8 +30,9 @@ public class SemesterServiceImpl implements SemesterService{
 	}
 
 	@Override
-	public Semester saveSemester(Semester semester, Long cycleId, Long yearId, Long userId) {
+	public Semester saveSemester(Long cycleId, Long yearId, Long userId) {
 		if(userId == null || cycleId == null || yearId == null) return null;
+		Semester semester = new Semester();
 		semester.setUser(new User(userId));
 		semester.setCycle(new Cycle(cycleId));
 		semester.setYear(new Year(yearId));

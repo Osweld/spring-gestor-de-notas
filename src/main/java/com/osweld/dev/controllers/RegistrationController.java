@@ -30,8 +30,9 @@ public class RegistrationController {
 
 
 
-    @PostMapping("/registration")
-    private ResponseEntity<Map<String ,Object>> saveUser(@Valid @RequestBody User user, BindingResult result){
+    @PostMapping("/registration/{careerId}")
+    private ResponseEntity<Map<String ,Object>> saveUser(@Valid @RequestBody User user, BindingResult result,
+                                                         @PathVariable Long careerId){
         Map<String, Object> body = new HashMap<String,Object>();
         if(result.hasErrors()){
             Map<String,String> errors = result.getFieldErrors().stream().
@@ -39,44 +40,45 @@ public class RegistrationController {
                             error.getField(),error -> error.getDefaultMessage()));
 
             body.put("erorrs",errors);
-            return new ResponseEntity<Map<String,Object>>(body, HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(body, HttpStatus.BAD_REQUEST);
         }
 
         try{
-            User userResult = userService.saveUser(user);
+            User userResult = userService.saveUser(user,careerId);
             if(userResult != null){
                 body.put("success","El usuario a sido creado exitosamente");
                 body.put("user",userResult);
-                return new ResponseEntity<Map<String,Object>>(body,HttpStatus.OK);
+                return new ResponseEntity<>(body,HttpStatus.OK);
             }else{
                 body.put("error","El usuario no pudo ser creado");
-                return new ResponseEntity<Map<String,Object>>(body,HttpStatus.INTERNAL_SERVER_ERROR);
+                return new ResponseEntity<>(body,HttpStatus.INTERNAL_SERVER_ERROR);
             }
 
         }catch(DataAccessException e){
             body.put("error","El usuario no pudo ser creado");
-            body.put("log","El usuario no pudo ser creado :"+e.getMostSpecificCause());
-            return  new ResponseEntity<Map<String,Object>>(body,HttpStatus.INTERNAL_SERVER_ERROR);
+            body.put("log","El usuario no pudo ser creado :"+e.getMessage());
+            e.printStackTrace();
+            return  new ResponseEntity<>(body,HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
     @GetMapping("/user/{idUser}")
     public ResponseEntity<Map<String,Object>> getUserById(@PathVariable Long idUser){
-        Map<String,Object> body = new HashMap<String,Object>();
+        Map<String,Object> body = new HashMap<>();
         try{
             User userResult = userService.getUser(idUser);
             if(userResult != null){
                 body.put("success","Se obtuvo el usuario exitosamente");
                 body.put("user",userResult);
-                return new ResponseEntity<Map<String,Object>>(body,HttpStatus.OK);
+                return new ResponseEntity<>(body,HttpStatus.OK);
             }else{
                 body.put("error","usuario no encontrado");
-                return new ResponseEntity<Map<String,Object>>(body,HttpStatus.INTERNAL_SERVER_ERROR);
+                return new ResponseEntity<>(body,HttpStatus.INTERNAL_SERVER_ERROR);
             }
         }catch (DataAccessException e) {
             body.put("error", "usuario no encontrado");
             body.put("log", "usuario no encontrado: " + e.getMostSpecificCause());
-            return new ResponseEntity<Map<String, Object>>(body, HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity<>(body, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 /*

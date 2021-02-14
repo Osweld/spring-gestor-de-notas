@@ -5,6 +5,8 @@ import com.osweld.dev.models.entity.Token;
 import com.osweld.dev.models.entity.User;
 import com.osweld.dev.services.TokenService;
 import com.osweld.dev.services.UserService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.http.HttpStatus;
@@ -28,6 +30,8 @@ public class TokenController {
     @Autowired
     private UserService userService;
 
+    //Logger log = LoggerFactory.getLogger(getClass());
+
     @GetMapping("/token/resetpassword/{email}")
     public ResponseEntity<Map<String,Object>> sendResetPasswordToken(@PathVariable String email){
         Map<String,Object> body = new HashMap<>();
@@ -46,6 +50,7 @@ public class TokenController {
             }
         }catch(DataAccessException e){
             body.put("error","Hubo un error al momento de enviar el enlace");
+            body.put("log","Hubo un error al momento de enviar el enlace: "+e.getMostSpecificCause());
             return new ResponseEntity<>(body, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
@@ -72,6 +77,7 @@ public class TokenController {
             }
         }catch(DataAccessException e){
             body.put("error","Hubo un error al momento de enviar el enlace");
+            body.put("log","Hubo un error al momento de enviar el enlace: "+e.getMostSpecificCause());
             return new ResponseEntity<>(body, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
@@ -93,7 +99,7 @@ public class TokenController {
                         && tokenDB.getTokenType().getId() == 1L){
                     User user = tokenDB.getUser();
                     user.setActive(true);
-                    userService.saveUser(user);
+                    userService.updateUser(user);
                     tokenDB.setActivated(true);
                     tokenService.activatedToken(tokenDB);
                     body.put("success","El usuario fue activado exitosamente");
@@ -112,7 +118,7 @@ public class TokenController {
         }
     }
     @PutMapping("/token/resetpassword/{token}")
-    public ResponseEntity<Map<String,Object>> ResetPassword(@PathVariable String token, @RequestBody String password){
+    public ResponseEntity<Map<String,Object>> ResetPassword(@PathVariable String token, @RequestBody User userPassword){
         Map<String,Object> body = new HashMap<>();
         try{
             Token tokenDB = tokenService.getToken(token);
@@ -125,10 +131,10 @@ public class TokenController {
             if(tokenDB != null ){
                 Long expirationDate = tokenDB.getExpirationDate().getTime();
                 if(expirationDate > System.currentTimeMillis()
-                        && tokenDB.getTokenType().getId() == 1L){
+                        && tokenDB.getTokenType().getId() == 2L){
                     User user = tokenDB.getUser();
-                    user.setPassword(password);
-                    userService.saveUser(user);
+                    user.setPassword(userPassword.getPassword());
+                    userService.updatePassword(user);
                     tokenDB.setActivated(true);
                     tokenService.activatedToken(tokenDB);
                     body.put("success","La contraseña fue cambiada exitosamente");

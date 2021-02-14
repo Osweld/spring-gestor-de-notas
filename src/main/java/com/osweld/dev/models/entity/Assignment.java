@@ -38,13 +38,13 @@ public class Assignment implements Serializable{
 	private Boolean finish;
 	@Column(name = "create_at")
 	private Date createAt;
-	@ManyToOne(cascade = CascadeType.ALL)
+	@ManyToOne
 	@JoinColumn(name = "subjectspersemester_id_subjects_per_semester")
 	private SubjectsPerSemester subjectsPerSemester;
-	@ManyToOne(cascade = CascadeType.ALL)
+	@ManyToOne
 	@JoinColumn(name = "activities_id_activity")
 	private Activity activity;
-	@ManyToOne(cascade = CascadeType.ALL)
+	@ManyToOne
 	@JoinColumn(name = "activitynumber_id_activity_number")
 	private ActivityNumber activityNumber;
 	

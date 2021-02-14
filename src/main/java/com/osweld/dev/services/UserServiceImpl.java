@@ -2,6 +2,7 @@ package com.osweld.dev.services;
 
 import java.util.List;
 
+import com.osweld.dev.models.entity.Career;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -39,11 +40,16 @@ public class UserServiceImpl implements UserService{
 
 	@Override
 	@Transactional()
-	public User saveUser(User user) {
-		Person person = personRepository.save(user.getPerson());
-		if(person == null) return null;
+	public User saveUser(User user,Long careerId) {
+
+		Person person = user.getPerson();
+		person.setCareer(new Career(careerId));
+		Person personDB = personRepository.save(person);
+
+		if(personDB == null) return null;
+
 		user.setPassword(PasswordEncoder.encode(user.getPassword()));
-		user.setPerson(person);
+		user.setPerson(personDB);
 		user.setRol(new Rol(1L));
 		user.setActive(false);
 		return userRepository.save(user);
@@ -60,6 +66,19 @@ public class UserServiceImpl implements UserService{
 	@Transactional(readOnly = true)
 	public User getUserByEmail(String email) {
 		return userRepository.findByEmail(email);
+	}
+
+	@Override
+	@Transactional()
+	public User updateUser(User user) {
+		return userRepository.save(user);
+	}
+
+	@Override
+	@Transactional()
+	public User updatePassword(User user) {
+		user.setPassword(PasswordEncoder.encode(user.getPassword()));
+		return userRepository.save(user);
 	}
 
 }

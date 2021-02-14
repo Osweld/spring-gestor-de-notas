@@ -17,7 +17,7 @@ Se creara un proyecto hecho con Spring y Angular para que los alumnos puedan ges
 - POST http://localhost:8080/auth/login
 
 #### User
-- GET http://localhost:8080/api/user/{idUser}
+- GET http://localhost:8080/api/user
 
 #### Semester
 - POST http://localhost:8080/api/semester/{cycleId}/{yearId}
@@ -36,6 +36,7 @@ Se creara un proyecto hecho con Spring y Angular para que los alumnos puedan ges
 - GET http://localhost:8080/api/assignment/{assignmentId}
 - GET http://localhost:8080/api/assignments/{subjectsPerSemesterId} []
 - DELETE http://localhost:8080/api/assignment/{assignmentId}
+- PUT http://localhost:8080/api/assignment
 
 #### Token
 - GET http://localhost:8080/api/token/resetpassword/{email}

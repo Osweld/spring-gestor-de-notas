@@ -47,7 +47,7 @@ public class Person implements Serializable{
 	private String gender;
 	@Column(name = "create_at")
 	private Date createAt;
-	@OneToOne(cascade = CascadeType.ALL)
+	@OneToOne()
 	@JoinColumn(name = "careers_id_career")
 	private Career career;
 

@@ -5,6 +5,8 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.Date;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -22,6 +24,8 @@ import io.jsonwebtoken.SignatureAlgorithm;
 
 @Component
 public class JWTServiceImpl implements JWTService{
+
+	//Logger log = LoggerFactory.getLogger(getClass());
 	
 	public static final String SECRET = Base64Utils.encodeToString("GestorNotas".getBytes());
 	public static final Long EXPIRATION_DATE = 1000*60*60*3L;
@@ -34,7 +38,8 @@ public class JWTServiceImpl implements JWTService{
 		Collection<? extends GrantedAuthority> authorities = user.getAuthorities();
 		Claims claims = Jwts.claims();
 		claims.put("authorities", new ObjectMapper().writeValueAsString(authorities));
-		String token = Jwts.builder().setId(user.getId().toString()).setClaims(claims)
+		//Agregar primero claims despues id y subject si no, no va a funcionar correctamente
+		String token = Jwts.builder().setClaims(claims).setId(user.getId().toString())
 				.setSubject(user.getUsername()).signWith(SignatureAlgorithm.HS512, SECRET.getBytes())
 				.setIssuedAt(new Date()).setExpiration(new Date(System.currentTimeMillis()+EXPIRATION_DATE))
 				.compact();
