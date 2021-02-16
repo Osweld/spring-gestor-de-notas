@@ -63,7 +63,7 @@ public class SemesterController {
             Semester semester = semesterService.getSemester(semesterId,userId);
             if(semester != null){
                 body.put("semester",semester);
-                body.put("success","Se a obtenido exitosamente el semestre");
+                //body.put("success","Se a obtenido exitosamente el semestre");
                 return new ResponseEntity<>(body,HttpStatus.OK);
             }else{
                 body.put("error","Semestre no encontrado");
@@ -77,7 +77,7 @@ public class SemesterController {
         }
     }
 
-    @GetMapping("/semesters")
+    @GetMapping("/semester")
     public ResponseEntity<Map<String,Object>> getAllSemester(Authentication auth){
         Map<String,Object> body = new HashMap<>();
         try{
@@ -85,7 +85,7 @@ public class SemesterController {
             List<Semester> semesterList = semesterService.getAllSemesterByUserId(userId);
             if(semesterList.size() > 0){
                 body.put("semester",semesterList);
-                body.put("success","Se a obtenido exitosamente los semestres");
+                //body.put("success","Se a obtenido exitosamente los semestres");
                 return new ResponseEntity<>(body,HttpStatus.OK);
             }else{
                 body.put("error","Semestres no encontrados");

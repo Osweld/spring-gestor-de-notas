@@ -29,7 +29,7 @@ public class UserController {
             User userResult = userService.getUser(userId);
             if(userResult != null){
                 userResult.setPassword(null);
-                body.put("success","Se obtuvo el usuario exitosamente");
+                //body.put("success","Se obtuvo el usuario exitosamente");
                 body.put("user",userResult);
                 return new ResponseEntity<>(body, HttpStatus.OK);
             }else{

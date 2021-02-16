@@ -43,7 +43,7 @@ public class SubjectsPerSemesterController {
             SubjectsPerSemester subjectsPerSemesterDB =
                     subjectsPerSemesterService.saveSubjectsPerSemester(subjectsPerCareerId,semesterId,userId);
             if(subjectsPerSemesterDB != null){
-                body.put("success","Materia guardado exitosamente");
+                //body.put("success","Materia guardado exitosamente");
                 body.put("subjectsPerSemester",subjectsPerSemesterDB);
                 return new ResponseEntity<>(body, HttpStatus.CREATED);
             }else{
@@ -65,7 +65,7 @@ public class SubjectsPerSemesterController {
             SubjectsPerSemester subjectsPerSemester = subjectsPerSemesterService.getSubjectsPerSemester(subjectsPerSemesterId,userId);
             if(subjectsPerSemester != null){
                 body.put("subjectsPerSemester",subjectsPerSemester);
-                body.put("success","Se a obtenido exitosamente la materia");
+                //body.put("success","Se a obtenido exitosamente la materia");
                 return new ResponseEntity<>(body,HttpStatus.OK);
             }else{
                 body.put("error","Materia no encontrada");
@@ -87,7 +87,7 @@ public class SubjectsPerSemesterController {
             List<SubjectsPerSemester> subjectsPerSemesterList = subjectsPerSemesterService.getAllSubjectsPerSemesterBySemesterId(semesterId,userId);
             if(subjectsPerSemesterList.size() > 0){
                 body.put("subjectsPerSemester",subjectsPerSemesterList);
-                body.put("success","Se a obtenido exitosamente las materias");
+                //body.put("success","Se a obtenido exitosamente las materias");
                 return new ResponseEntity<>(body,HttpStatus.OK);
             }else{
                 body.put("error","Semestres no encontrados");

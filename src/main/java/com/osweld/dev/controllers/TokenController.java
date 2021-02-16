@@ -55,7 +55,7 @@ public class TokenController {
         }
     }
 
-    @GetMapping("/token/sendactivemail/{email}")
+    @GetMapping("/token/activeaccount/{email}")
     public ResponseEntity<Map<String,Object>> sendActivateAccountMail(@PathVariable String email){
         Map<String,Object> body = new HashMap<>();
 

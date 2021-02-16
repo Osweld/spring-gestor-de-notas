@@ -46,7 +46,8 @@ public class RegistrationController {
         try{
             User userResult = userService.saveUser(user,careerId);
             if(userResult != null){
-                body.put("success","El usuario a sido creado exitosamente");
+               // body.put("success","El usuario a sido creado exitosamente");
+                userResult.setPassword(null);
                 body.put("user",userResult);
                 return new ResponseEntity<>(body,HttpStatus.OK);
             }else{
@@ -59,26 +60,6 @@ public class RegistrationController {
             body.put("log","El usuario no pudo ser creado :"+e.getMessage());
             e.printStackTrace();
             return  new ResponseEntity<>(body,HttpStatus.INTERNAL_SERVER_ERROR);
-        }
-    }
-
-    @GetMapping("/user/{idUser}")
-    public ResponseEntity<Map<String,Object>> getUserById(@PathVariable Long idUser){
-        Map<String,Object> body = new HashMap<>();
-        try{
-            User userResult = userService.getUser(idUser);
-            if(userResult != null){
-                body.put("success","Se obtuvo el usuario exitosamente");
-                body.put("user",userResult);
-                return new ResponseEntity<>(body,HttpStatus.OK);
-            }else{
-                body.put("error","usuario no encontrado");
-                return new ResponseEntity<>(body,HttpStatus.INTERNAL_SERVER_ERROR);
-            }
-        }catch (DataAccessException e) {
-            body.put("error", "usuario no encontrado");
-            body.put("log", "usuario no encontrado: " + e.getMostSpecificCause());
-            return new ResponseEntity<>(body, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 /*

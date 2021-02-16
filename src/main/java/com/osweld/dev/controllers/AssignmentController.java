@@ -46,7 +46,7 @@ public class AssignmentController {
             Long userId = (Long) auth.getPrincipal();
             Assignment assignmentDB = assignmentService.saveAssignment(assignment, activityId, activityNumberId, subjectsPerSemesterId, userId);
             if (assignmentDB != null) {
-                body.put("success", "Actividad guardado exitosamente");
+                //body.put("success", "Actividad guardado exitosamente");
                 body.put("assignment", assignmentDB);
                 return new ResponseEntity<>(body, HttpStatus.CREATED);
             } else {
@@ -68,7 +68,7 @@ public class AssignmentController {
             Assignment assignment = assignmentService.getAssignment(assignmentId, userId);
             if (assignment != null) {
                 body.put("assignment", assignment);
-                body.put("success", "Se a obtenido exitosamente la actividad");
+                //body.put("success", "Se a obtenido exitosamente la actividad");
                 return new ResponseEntity<>(body, HttpStatus.OK);
             } else {
                 body.put("error", "Actividad no encontrada");
@@ -90,7 +90,7 @@ public class AssignmentController {
             List<Assignment> assignmentList = assignmentService.getAllAssignmentBySubjectsPerSemesterId(subjectsPerSemesterId, userId);
             if (assignmentList.size() > 0) {
                 body.put("assignment", assignmentList);
-                body.put("success", "Se a obtenido exitosamente las actividades");
+                //body.put("success", "Se a obtenido exitosamente las actividades");
                 return new ResponseEntity<>(body, HttpStatus.OK);
             } else {
                 body.put("error", "Actividades no encontrados");
@@ -135,7 +135,7 @@ public class AssignmentController {
             Long userId = (Long) auth.getPrincipal();
             Assignment assignmentDB = assignmentService.updateAssignment(assignment, userId);
             if (assignmentDB != null) {
-                body.put("success", "Actividad actualizada exitosamente");
+                //body.put("success", "Actividad actualizada exitosamente");
                 body.put("assignment", assignmentDB);
                 return new ResponseEntity<>(body, HttpStatus.CREATED);
             } else {

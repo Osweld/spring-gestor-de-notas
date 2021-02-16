@@ -22,7 +22,7 @@ Se creara un proyecto hecho con Spring y Angular para que los alumnos puedan ges
 #### Semester
 - POST http://localhost:8080/api/semester/{cycleId}/{yearId}
 - GET http://localhost:8080/api/semester/{semesterId}
-- GET http://localhost:8080/api/semesters []
+- GET http://localhost:8080/api/semester []
 - DELETE http://localhost:8080/api/semester/{semesterId}
 
 #### Subject per semester
@@ -40,6 +40,6 @@ Se creara un proyecto hecho con Spring y Angular para que los alumnos puedan ges
 
 #### Token
 - GET http://localhost:8080/api/token/resetpassword/{email}
-- GET http://localhost:8080/api/token/sendactivemail/{email}
+- GET http://localhost:8080/api/token/activeaccount/{email}
 - PUT http://localhost:8080/api/token/activeaccount/{token}
 - PUT http://localhost:8080/api/token/resetpassword/{token}

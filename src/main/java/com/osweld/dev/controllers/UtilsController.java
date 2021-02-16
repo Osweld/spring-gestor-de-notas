@@ -53,7 +53,7 @@ public class UtilsController {
         try{
             List<Career> careerList = careerService.getallCareer();
             if(careerList.size() > 0){
-                body.put("success","Se obtuvieron las carreras");
+                //body.put("success","Se obtuvieron las carreras");
                 body.put("career",careerList);
                 return new ResponseEntity<>(body, HttpStatus.OK);
             }else{
@@ -73,7 +73,7 @@ public class UtilsController {
         try{
             List<Cycle> cycleList = cycleService.getAllCycle();
             if(cycleList.size() > 0){
-                body.put("success","Se obtuvieron los ciclos");
+                //body.put("success","Se obtuvieron los ciclos");
                 body.put("cycle",cycleList);
                 return new ResponseEntity<>(body, HttpStatus.OK);
             }else{
@@ -93,7 +93,7 @@ public class UtilsController {
         try{
             List<Year> yearList = yearService.getAllYear();
             if(yearList.size() > 0){
-                body.put("success","Se obtuvieron los años");
+                //body.put("success","Se obtuvieron los años");
                 body.put("year",yearList);
                return new ResponseEntity<>(body, HttpStatus.OK);
             }else{
@@ -113,7 +113,7 @@ public class UtilsController {
         try{
            List<SubjectsPerCareer> subjectsPerCareerList = subjectsPerCareerService.getAllSubjectsPerCareerByCareerAndCycle(idCareer,idCycle);
             if(subjectsPerCareerList.size() > 0){
-                body.put("success","Se obtuvieron las materias de la carrera");
+                //body.put("success","Se obtuvieron las materias de la carrera");
                 body.put("subjectsPerCareer",subjectsPerCareerList);
                return new ResponseEntity<>(body, HttpStatus.OK);
             }else{
@@ -133,7 +133,7 @@ public class UtilsController {
         try{
             List<Activity> activityList = activityService.getAllActivity();
             if(activityList.size() > 0){
-                body.put("success","Se obtuvieron las actividades");
+                //body.put("success","Se obtuvieron las actividades");
                 body.put("activity",activityList);
                 return new ResponseEntity<>(body, HttpStatus.OK);
             }else{
@@ -153,7 +153,7 @@ public class UtilsController {
         try{
             List<ActivityNumber> activityNumberList = activityNumberService.getAllActivityNumber();
             if(activityNumberList.size() > 0){
-                body.put("success","Se obtuvo el numero de actividad");
+                //body.put("success","Se obtuvo el numero de actividad");
                 body.put("activityNumber",activityNumberList);
                 return new ResponseEntity<>(body, HttpStatus.OK);
             }else{
