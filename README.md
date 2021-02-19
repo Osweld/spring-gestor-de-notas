@@ -13,7 +13,7 @@ Se creara un proyecto hecho con Spring y Angular para que los alumnos puedan ges
 - GET http://localhost:8080/api/utils/activitynumber []
 
 #### Login and Registration
-- POST http://localhost:8080/api/registration
+- POST http://localhost:8080/api/registration/{careerId}
 - POST http://localhost:8080/auth/login
 
 #### User

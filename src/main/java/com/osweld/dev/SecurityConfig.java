@@ -39,7 +39,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 		http.authorizeRequests().antMatchers("/api/utils/career/**","/api/token/**","/api/registration/**").permitAll()
 		.antMatchers("/**").hasAnyRole("USER").anyRequest().authenticated().and()
 		.addFilter(new JWTAuthenticationFilter(authenticationManager(), jwtService))
-		.addFilter(new JWTAuthorizationFilter(authenticationManager(), jwtService))
+		.addFilter(new JWTAuthorizationFilter(authenticationManager(), jwtService)).cors().and()
 		.csrf().disable().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 	}
 	

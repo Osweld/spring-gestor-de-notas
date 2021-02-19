@@ -5,6 +5,7 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.Date;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.security.core.Authentication;
@@ -65,6 +66,18 @@ public class JWTServiceImpl implements JWTService{
 	}
 
 	@Override
+	public String refreshToken(Long id, String username, Collection<? extends GrantedAuthority> authorities) throws IOException {
+		Claims claims = Jwts.claims();
+		claims.put("authorities", new ObjectMapper().writeValueAsString(authorities));
+		//Agregar primero claims despues id y subject si no, no va a funcionar correctamente
+		String token = Jwts.builder().setClaims(claims).setId(id.toString())
+				.setSubject(username).signWith(SignatureAlgorithm.HS512, SECRET.getBytes())
+				.setIssuedAt(new Date()).setExpiration(new Date(System.currentTimeMillis()+EXPIRATION_DATE))
+				.compact();
+		return token;
+	}
+
+	@Override
 	public String getUsername(String token) {
 		
 		return getClaims(token).getSubject();
@@ -73,6 +86,11 @@ public class JWTServiceImpl implements JWTService{
 	@Override
 	public Long getId(String token) {
 			return Long.parseLong(getClaims(token).getId());
+	}
+
+	@Override
+	public Date getExpiration(String token) {
+		return getClaims(token).getExpiration();
 	}
 
 	@Override

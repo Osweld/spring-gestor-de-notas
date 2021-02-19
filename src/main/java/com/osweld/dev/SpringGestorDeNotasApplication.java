@@ -17,4 +17,5 @@ public class SpringGestorDeNotasApplication {
 		return new BCryptPasswordEncoder();
 	}
 
+
 }

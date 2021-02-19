@@ -1,6 +1,7 @@
 package com.osweld.dev.auth.filter;
 
 import java.io.IOException;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -9,6 +10,8 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -25,6 +28,8 @@ import com.osweld.dev.auth.user.AuthUser;
 import com.osweld.dev.models.entity.User;
 
 public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilter{
+
+	private Logger log = LoggerFactory.getLogger(getClass());
 
 	private AuthenticationManager authenticationManager;
 	private JWTService jwtService;
@@ -68,10 +73,12 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
 	protected void successfulAuthentication(HttpServletRequest request, HttpServletResponse response, FilterChain chain,
 			Authentication authResult) throws IOException, ServletException {
 		String token = jwtService.create(authResult);
+
 		response.addHeader(JWTServiceImpl.HEADER_STRING, JWTServiceImpl.TOKEN_PREFIX+token);
 		AuthUser user = (AuthUser) authResult.getPrincipal();
 		Map<String,Object> body = new HashMap<String,Object>();
 		body.put("token", token);
+		body.put("expiration",jwtService.getExpiration(JWTServiceImpl.TOKEN_PREFIX+token));
 		body.put("user", user);
 		response.getWriter().write(new ObjectMapper().writeValueAsString(body));
 		response.setStatus(200);
@@ -83,9 +90,12 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
 	@Override
 	protected void unsuccessfulAuthentication(HttpServletRequest request, HttpServletResponse response,
 			AuthenticationException failed) throws IOException, ServletException {
+
 		Map<String,Object> body = new HashMap<String,Object>();
-		body.put("message", "Error: usuario o contraseña incorrecto");
+		body.put("message", "usuario o contraseña incorrecta");
+		body.put("email","Revisa tu email en caso de no tener activada la cuenta");
 		body.put("error",failed.getMessage());
+
 		
 		response.getWriter().write(new ObjectMapper().writeValueAsString(body));
 		response.setStatus(401);
