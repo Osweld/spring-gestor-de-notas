@@ -13,10 +13,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.PrePersist;
 import javax.persistence.Table;
-import javax.validation.constraints.DecimalMax;
-import javax.validation.constraints.DecimalMin;
-import javax.validation.constraints.NotNull;
-
+import javax.validation.constraints.*;
 
 
 @Entity
@@ -30,6 +27,8 @@ public class Assignment implements Serializable{
 	@Column(name = "id_assignment")
 	private Long id;
 	@NotNull(message = "Este campo no puede quedar vacio")
+	@Min(value = 0,message = "No puede ser menor a 0")
+	@Max(value = 100,message = "No puede ser mayor a 100")
 	private Short percent;
 	@DecimalMax(value = "10",message = "No puede ser mayor a 10")
 	@DecimalMin(value = "0",message = "No puede ser menor a 0")

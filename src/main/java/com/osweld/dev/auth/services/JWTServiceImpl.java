@@ -8,6 +8,7 @@ import java.util.Date;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -28,7 +29,7 @@ public class JWTServiceImpl implements JWTService{
 
 	//Logger log = LoggerFactory.getLogger(getClass());
 	
-	public static final String SECRET = Base64Utils.encodeToString("GestorNotas".getBytes());
+	public static final String SECRET = Base64Utils.encodeToString("wGestorNotasw".getBytes());
 	public static final Long EXPIRATION_DATE = 1000*60*60*3L;
 	public static final String TOKEN_PREFIX = "Bearer ";
 	public static final String HEADER_STRING = "authorization";

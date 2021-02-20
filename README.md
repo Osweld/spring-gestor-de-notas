@@ -15,6 +15,7 @@ Se creara un proyecto hecho con Spring y Angular para que los alumnos puedan ges
 #### Login and Registration
 - POST http://localhost:8080/api/registration/{careerId}
 - POST http://localhost:8080/auth/login
+- GET http://localhost:8080/auth/refresh (refresh token)
 
 #### User
 - GET http://localhost:8080/api/user

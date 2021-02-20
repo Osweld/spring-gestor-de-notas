@@ -6,10 +6,7 @@ import io.jsonwebtoken.JwtException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.RequestHeader;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
@@ -24,6 +21,7 @@ public class authController {
     @Autowired
     private JWTService jwtService;
 
+    @GetMapping("/refresh")
     public ResponseEntity<Map<String,Object>> refreshtoken(HttpServletRequest request) throws IOException {
         Map<String,Object> body =new HashMap<>();
         String header = request.getHeader(JWTServiceImpl.HEADER_STRING);

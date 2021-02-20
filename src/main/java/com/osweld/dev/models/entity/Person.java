@@ -18,6 +18,7 @@ import javax.persistence.TemporalType;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Past;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -38,6 +39,7 @@ public class Person implements Serializable{
 	@NotNull(message = "Este campo no puede quedar vacio")
 	@Temporal(value = TemporalType.DATE)
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	@Past(message = "La fecha de nacimientyo es incorrecta")
 	private Date birthdate;
 	@NotEmpty(message = "Este campo no puede quedar vacio")
 	@Email(message = "El email no es valido")

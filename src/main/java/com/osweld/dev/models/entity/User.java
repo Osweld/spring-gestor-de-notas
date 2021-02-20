@@ -18,8 +18,10 @@ import javax.persistence.OneToOne;
 import javax.persistence.PrePersist;
 import javax.persistence.Table;
 import javax.validation.Valid;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 @Entity
 @Table(name = "users")
@@ -33,8 +35,10 @@ public class User implements Serializable{
 	private Long id;
 	@NotEmpty(message = "Este campo no puede quedar vacio")
 	@Column(unique = true)
+	@Size(min = 6, max = 20,message = "debe contener entre 6 y 20 caracteres el nombre de usuario")
 	private String username;
 	@NotEmpty(message = "Este campo no puede quedar vacio")
+	@Size(min = 6,message = "debe contener entre 6 y 20 caracteres la contraseña")
 	private String password;
 	private Boolean active;
 	@Column(name = "create_at")
