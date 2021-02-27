@@ -28,7 +28,7 @@ public class TokenServiceImpl implements TokenService{
 	public Token createToken(Long userId,Long tokenTypeId) {
 
 		UUID uuid = UUID.randomUUID();
-		Date date = new Date(System.currentTimeMillis()+(1000*60*15));
+		Date date = new Date(System.currentTimeMillis()+(1000*60*60));
 		Token token = tokenRepository.save(new Token(uuid.toString(),false,date,new User(userId),new TokenType(tokenTypeId)));
 		return token;
 	}

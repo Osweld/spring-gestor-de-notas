@@ -107,7 +107,7 @@ public class SubjectsPerSemesterController {
         try{
             Long userId = (Long)auth.getPrincipal();
             subjectsPerSemesterService.deleteSubjectsPerSemester(subjectsPerSemesterId,userId);
-            body.put("success","Materia eliminada exitosamente");
+            //body.put("success","Materia eliminada exitosamente");
             return new ResponseEntity<>(body,HttpStatus.OK);
         }catch (DataAccessException e){
             body.put("error","No se pudo eliminar la materia");

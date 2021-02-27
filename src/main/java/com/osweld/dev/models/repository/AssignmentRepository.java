@@ -13,5 +13,9 @@ public interface AssignmentRepository extends JpaRepository<Assignment,Long>{
 	public List<Assignment> findBySubjectsPerSemester(Long subjectsPerSemesterId,Long userId);
 	@Query(value = "SELECT a FROM Assignment a WHERE a.id = ?1 AND a.subjectsPerSemester.semester.user.id = ?2")
 	public Assignment findById(Long assignmentId,Long userId);
+//	@Query(value = "SELECT a FROM Assignment a JOIN FETCH a.subjectsPerSemester sps ON sps.id = ?1 AND sps.semester.user.id = ?2")
+//	public List<Assignment> findBySubjectsPerSemester(Long subjectsPerSemesterId,Long userId);
+//	@Query(value = "SELECT a FROM Assignment a WHERE a.id = ?1 AND a.subjectsPerSemester.semester.user.id = ?2")
+//	public Assignment findById(Long assignmentId,Long userId);
 
 }

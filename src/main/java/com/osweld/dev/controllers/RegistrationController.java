@@ -5,6 +5,8 @@ import com.osweld.dev.models.entity.Token;
 import com.osweld.dev.models.entity.User;
 import com.osweld.dev.services.TokenService;
 import com.osweld.dev.services.UserService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.http.HttpStatus;
@@ -30,6 +32,8 @@ public class RegistrationController {
 
 
 
+
+
     @PostMapping("/registration/{careerId}")
     private ResponseEntity<Map<String ,Object>> saveUser(@Valid @RequestBody User user, BindingResult result,
                                                          @PathVariable Long careerId){
@@ -44,6 +48,18 @@ public class RegistrationController {
         }
 
         try{
+            User userExist = userService.getUserByUsernameAndEmail(user.getUsername(),user.getPerson().getEmail());
+            if(userExist != null){
+                if(user.getUsername().equals(userExist.getUsername())){
+                    body.put("error","El nombre de usuario ya existe");
+                    return new ResponseEntity<>(body,HttpStatus.INTERNAL_SERVER_ERROR);
+                }else{
+                    body.put("error","El email ya ha sido utilizado");
+                    return new ResponseEntity<>(body,HttpStatus.INTERNAL_SERVER_ERROR);
+                }
+            }
+
+
             User userResult = userService.saveUser(user,careerId);
             if(userResult != null){
                // body.put("success","El usuario a sido creado exitosamente");

@@ -105,7 +105,7 @@ public class SemesterController {
         try{
             Long userId = (Long)auth.getPrincipal();
             semesterService.deleteSemester(semesterId,userId);
-            body.put("success","Semestre eliminado exitosamente");
+            //body.put("success","Semestre eliminado exitosamente");
             return new ResponseEntity<>(body,HttpStatus.OK);
         }catch (DataAccessException e){
             body.put("error","No se pudo eliminar el semestre");

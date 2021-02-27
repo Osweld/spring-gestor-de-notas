@@ -16,6 +16,7 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
@@ -90,24 +91,19 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
 	@Override
 	protected void unsuccessfulAuthentication(HttpServletRequest request, HttpServletResponse response,
 			AuthenticationException failed) throws IOException, ServletException {
-
 		Map<String,Object> body = new HashMap<String,Object>();
-		body.put("message", "usuario o contraseña incorrecta");
-		body.put("email","Revisa tu email en caso de no tener activada la cuenta");
 		body.put("error",failed.getMessage());
+		if("User is disabled".equals(failed.getMessage())){
+			body.put("code",0001);
+			body.put("error", "Su cuenta no esta activa, revise su email para activar su cuenta");
+		}else{
+			body.put("error", "usuario o contraseña incorrecta");
+		}
 
 		
 		response.getWriter().write(new ObjectMapper().writeValueAsString(body));
 		response.setStatus(401);
 		response.setContentType("application/json");
 	}
-		
-	
-	
-	
-	
-	
-	
-	
-	
+
 }

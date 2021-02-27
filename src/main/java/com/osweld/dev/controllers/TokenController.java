@@ -42,7 +42,7 @@ public class TokenController {
 
                 Token token = tokenService.createToken(user.getId(),2L);
                 mailService.SendMimeMessageActivation(user.getPerson().getEmail(),token.getToken());
-                body.put("success","Se a enviado un enlace a tu correo electronico");
+                //body.put("success","Se a enviado un enlace a tu correo electronico");
                 return new ResponseEntity<>(body, HttpStatus.OK);
             }else{
                 body.put("error","Correo no encontrado");
@@ -64,7 +64,7 @@ public class TokenController {
             if(user != null){
 
                 if(user.getActive()){
-                    body.put("success","El usuario ya esta activo");
+                   // body.put("success","El usuario ya esta activo");
                     return new ResponseEntity<>(body, HttpStatus.OK);
                 }
                 Token token = tokenService.createToken(user.getId(),1L);
@@ -90,7 +90,7 @@ public class TokenController {
             if(tokenDB != null ){
 
                 if(tokenDB.getActivated()){
-                    body.put("success","El usuario ya esta activo");
+                  //  body.put("success","El usuario ya esta activo");
                     return new ResponseEntity<>(body,HttpStatus.OK);
                 }
 
@@ -137,7 +137,7 @@ public class TokenController {
                     userService.updatePassword(user);
                     tokenDB.setActivated(true);
                     tokenService.activatedToken(tokenDB);
-                    body.put("success","La contraseña fue cambiada exitosamente");
+                    //body.put("success","La contraseña fue cambiada exitosamente");
                     return new ResponseEntity<>(body,HttpStatus.OK);
                 }else{
                     body.put("error","El token no es valido");
